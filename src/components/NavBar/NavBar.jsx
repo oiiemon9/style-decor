@@ -146,6 +146,9 @@ const NavBar = () => {
                     <a>Settings</a>
                   </li>
                   <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
                     <button onClick={handleLogout}>Logout</button>
                   </li>
                 </motion.ul>

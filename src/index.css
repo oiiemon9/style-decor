@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.serif-font {
+  font-family: 'Playfair', serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+@import 'tailwindcss';
+@plugin "daisyui";

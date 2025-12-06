@@ -13,6 +13,7 @@
     "@headlessui/react": "^2.2.9",
     "@tailwindcss/vite": "^4.1.17",
     "daisyui": "^5.5.8",
+    "firebase": "^12.6.0",
     "hamburger-react": "^2.5.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

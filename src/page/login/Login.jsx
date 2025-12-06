@@ -1,7 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../../Context/FirebaseProvider';
 
 const Login = () => {
+  const { googleLogin, loginUser, setLoginUser } = useContext(AuthContext);
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await googleLogin();
+      const user = result.user;
+      setLoginUser(user);
+    } catch (error) {
+      console.error('Google login error:', error);
+    }
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -40,7 +53,7 @@ const Login = () => {
             </div>
 
             <div>
-              <h2 className="text-4xl font-bold mb-4 serif-font">
+              <h2 className="text-6xl font-bold mb-4 serif-font">
                 Welcome Back!
               </h2>
               <p className="text-blue-100 text-base leading-relaxed">
@@ -69,7 +82,10 @@ const Login = () => {
               Join thousands of users managing their workspace
             </p>
 
-            <button className="btn bg-white text-black border-[#e5e5e5] w-full">
+            <button
+              onClick={handleGoogleLogin}
+              className="btn bg-white text-black border-[#e5e5e5] w-full"
+            >
               <svg
                 aria-label="Google logo"
                 width="16"

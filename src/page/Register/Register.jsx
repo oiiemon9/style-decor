@@ -57,7 +57,7 @@ const Register = () => {
             </div>
 
             <div>
-              <h2 className="text-4xl font-bold mb-4 serif-font">
+              <h2 className="text-6xl font-bold mb-4 serif-font">
                 Welcome Our Website
               </h2>
               <p className="text-blue-100 text-base leading-relaxed">

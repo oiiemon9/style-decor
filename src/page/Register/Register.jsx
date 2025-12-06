@@ -1,40 +1,97 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { IoMdPhotos } from 'react-icons/io';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { AuthContext } from '../../Context/FirebaseProvider';
+import useAxios from '../../CustomHook/useAxios';
+import { set, useForm } from 'react-hook-form';
+import axios from 'axios';
+import { updateProfile } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const { googleLogin, loginUser, setLoginUser, registerUser } =
+    useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const axiosInstance = useAxios();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await googleLogin();
+      const user = result.user;
+      setLoginUser(user);
+      if (user) {
+        const res = await axiosInstance.post('/users', {
+          name: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+        });
+        console.log('User data saved:', res.data);
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Google login error:', error);
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-  };
   const [imagePreview, setImagePreview] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
+    setProfileImage(file);
+
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result);
-        setFormData((prev) => ({
-          ...prev,
-          image: file,
-        }));
-      };
-      reader.readAsDataURL(file);
+      const previewURL = URL.createObjectURL(file);
+      setImagePreview(previewURL);
+    }
+  };
+
+  const handelRegister = async (data) => {
+    const formData = new FormData();
+    formData.append('image', profileImage);
+    setIsLoading(true);
+
+    try {
+      const result = await registerUser(data.email, data.password);
+      const user = result.user;
+      if (user) {
+        const imageAPIUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${
+          import.meta.env.VITE_IMGBB_key
+        }`;
+        const imageRes = await axios.post(imageAPIUrl, formData);
+        const imageData = imageRes.data;
+        const photoURL = imageData.data.url;
+        const update = async () => {
+          try {
+            const update = await updateProfile(user, {
+              displayName: data.name,
+              photoURL: photoURL,
+            });
+          } catch (error) {
+            console.log(error);
+          }
+          setLoginUser(user);
+          const res = await axiosInstance.post('/users', {
+            name: data.name,
+            email: data.email,
+            photoURL: photoURL,
+          });
+          toast.success('Registration Successful');
+          navigate('/');
+        };
+        await update();
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -86,7 +143,10 @@ const Register = () => {
               Join thousands of users managing their workspace
             </p>
 
-            <button className="btn bg-white text-black border-[#e5e5e5] w-full">
+            <button
+              onClick={handleGoogleLogin}
+              className="btn bg-white text-black border-[#e5e5e5] w-full"
+            >
               <svg
                 aria-label="Google logo"
                 width="16"
@@ -126,20 +186,22 @@ const Register = () => {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit(handelRegister)} className="space-y-5">
               <div className="relative">
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Name
                 </label>
                 <input
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
                   className="w-full bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg py-3 pl-4 pr-4 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-0 transition-colors duration-300"
                   placeholder="Enter your name"
                   type="text"
-                  required
+                  {...register('name', { required: true })}
                 />
+                {errors.name && (
+                  <span className="text-red-500 text-sm">
+                    This field is required
+                  </span>
+                )}
               </div>
 
               <div className="relative">
@@ -147,14 +209,16 @@ const Register = () => {
                   Email Address
                 </label>
                 <input
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  {...register('email', { required: true })}
                   className="w-full bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg py-3 pl-4 pr-4 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-0 transition-colors duration-300"
                   placeholder="Enter your email"
                   type="email"
-                  required
                 />
+                {errors.email && (
+                  <span className="text-red-500 text-sm">
+                    This field is required
+                  </span>
+                )}
               </div>
 
               <div className="relative">
@@ -198,24 +262,31 @@ const Register = () => {
                   </div>
                 </div>
               </div>
-
               <div className="relative">
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Password
                 </label>
                 <input
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
+                  {...register('password', { required: true })}
                   className="w-full bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg py-3 pl-4 pr-4 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-0 transition-colors duration-300"
                   placeholder="Password"
                   type="password"
-                  required
                 />
+                {errors.password && (
+                  <span className="text-red-500 text-sm">
+                    This field is required
+                  </span>
+                )}
               </div>
 
               <div className="flex items-center space-x-2 text-sm">
-                <input type="checkbox" id="terms" className="w-4 h-4 rounded" />
+                <input
+                  {...register('terms', { required: true })}
+                  type="checkbox"
+                  id="terms"
+                  className="w-4 h-4 rounded"
+                />
+
                 <label
                   htmlFor="terms"
                   className="text-gray-600 dark:text-gray-400"
@@ -226,12 +297,21 @@ const Register = () => {
                   </span>
                 </label>
               </div>
+              {errors.terms && (
+                <span className="text-red-500 text-sm">
+                  You must agree to the terms
+                </span>
+              )}
 
               <button
                 type="submit"
                 className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-6"
               >
-                CREATE ACCOUNT
+                {isLoading ? (
+                  <span className="loading loading-dots loading-md"></span>
+                ) : (
+                  'CREATE ACCOUNT'
+                )}
               </button>
             </form>
           </div>

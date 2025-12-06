@@ -5,11 +5,13 @@ import App from './App.jsx';
 import { RouterProvider } from 'react-router';
 import { Router } from './Router/Router.jsx';
 import FirebaseProvider from './Context/FirebaseProvider.jsx';
+import { ToastContainer } from 'react-toastify';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <FirebaseProvider>
       <RouterProvider router={Router} />
+      <ToastContainer />
     </FirebaseProvider>
   </StrictMode>
 );

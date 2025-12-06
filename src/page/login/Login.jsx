@@ -1,37 +1,56 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../Context/FirebaseProvider';
+import useAxios from '../../CustomHook/useAxios';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 const Login = () => {
-  const { googleLogin, loginUser, setLoginUser } = useContext(AuthContext);
+  const { googleLogin, loginUser, setLoginUser, login } =
+    useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const axiosInstance = useAxios();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const handleGoogleLogin = async () => {
     try {
       const result = await googleLogin();
       const user = result.user;
       setLoginUser(user);
+      if (user) {
+        const res = await axiosInstance.post('/users', {
+          name: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+        });
+        console.log('User data saved:', res.data);
+        navigate('/');
+      }
     } catch (error) {
       console.error('Google login error:', error);
     }
   };
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
+  const handleLogin = async (data) => {
+    const { email, password } = data;
+    setIsLoading(true);
+    try {
+      const result = await login(email, password);
+      const user = result.user;
+      setLoginUser(user);
+      toast.success('Login Successful');
+      navigate('/');
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -125,22 +144,24 @@ const Login = () => {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit(handleLogin)} className="space-y-5">
               <div className="relative">
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Email Address
                 </label>
                 <div className="relative">
                   <input
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
+                    {...register('email', { required: true })}
                     className="w-full bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg py-3 pl-12 pr-4 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-0 transition-colors duration-300"
                     placeholder="Enter your email"
                     type="email"
-                    required
                   />
                 </div>
+                {errors.email && (
+                  <span className="text-red-500 text-sm">
+                    This field is required
+                  </span>
+                )}
               </div>
 
               <div className="relative">
@@ -149,22 +170,28 @@ const Login = () => {
                 </label>
                 <div className="relative">
                   <input
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
+                    {...register('password', { required: true })}
                     className="w-full bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg py-3 pl-12 pr-4 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-0 transition-colors duration-300"
                     placeholder="Password"
                     type="password"
-                    required
                   />
                 </div>
+                {errors.password && (
+                  <span className="text-red-500 text-sm">
+                    This field is required
+                  </span>
+                )}
               </div>
 
               <button
                 type="submit"
                 className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-6"
               >
-                LOGIN
+                {isLoading ? (
+                  <span className="loading loading-dots loading-md"></span>
+                ) : (
+                  'LOGIN'
+                )}
               </button>
             </form>
           </div>

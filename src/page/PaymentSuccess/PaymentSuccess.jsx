@@ -2,7 +2,7 @@ import { CheckCircle } from 'lucide-react';
 import React, { use, useEffect } from 'react';
 import { AuthContext } from '../../Context/FirebaseProvider';
 import useAxiosSecure from '../../CustomHook/useAxiosSecure';
-import { useSearchParams } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 
 const PaymentSuccess = () => {
   const { loginUser } = use(AuthContext);
@@ -10,7 +10,6 @@ const PaymentSuccess = () => {
   const sessionId = searchParams.get('session_id');
   const axiosInstance = useAxiosSecure();
 
-  console.log(sessionId);
   useEffect(() => {
     if (sessionId) {
       axiosInstance.post(`/payment-success?session_id=${sessionId}`);
@@ -43,12 +42,12 @@ const PaymentSuccess = () => {
         </div>
 
         {/* Button */}
-        <a
-          href="/"
+        <Link
+          to="/"
           className="inline-block bg-primary text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-primary/90 transition"
         >
           Back to Home
-        </a>
+        </Link>
       </div>
     </div>
   );

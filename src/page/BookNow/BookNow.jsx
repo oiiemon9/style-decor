@@ -34,6 +34,7 @@ const BookNow = () => {
     console.log(data);
     data.serviceId = bookService?._id;
     data.serviceTitle = bookService?.serviceTitle;
+    data.serviceImage = bookService?.serviceImage;
     data.quantity = quantity;
     data.totalPrice = bookService?.price * quantity;
     data.paymentStatus = 'pending';
@@ -152,6 +153,23 @@ const BookNow = () => {
                     {errors.phone && (
                       <span className="text-red-500 text-sm mt-1">
                         Phone number is required
+                      </span>
+                    )}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                      Event Date
+                    </label>
+
+                    <input
+                      {...register('eventDate', { required: true })}
+                      type="date"
+                      className="w-full bg-gray-100 dark:bg-gray-800 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg p-3 text-gray-900 dark:text-gray-100 placeholder-gray-500"
+                    />
+
+                    {errors.eventDate && (
+                      <span className="text-red-500 text-sm">
+                        This field is required
                       </span>
                     )}
                   </div>

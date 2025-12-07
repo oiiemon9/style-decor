@@ -66,8 +66,7 @@ const Register = () => {
           import.meta.env.VITE_IMGBB_key
         }`;
         const imageRes = await axios.post(imageAPIUrl, formData);
-        const imageData = imageRes.data;
-        const photoURL = imageData.data.url;
+        const photoURL = imageRes.data.data.display_url;
         const update = async () => {
           try {
             const update = await updateProfile(user, {

@@ -13,6 +13,7 @@ import BookNow from '../page/BookNow/BookNow';
 import UserPrivateRoute from '../PrivateRoute/User/UserPrivateRoute';
 import PaymentSuccess from '../page/PaymentSuccess/PaymentSuccess';
 import PaymentCancel from '../page/PaymentCancel/PaymentCancel';
+import BookingList from '../components/Dashboard/BookingList/BookingList';
 
 export const Router = createBrowserRouter([
   {
@@ -67,7 +68,11 @@ export const Router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    Component: DashboardRoot,
+    element: (
+      <UserPrivateRoute>
+        <DashboardRoot></DashboardRoot>
+      </UserPrivateRoute>
+    ),
     children: [
       {
         index: true,
@@ -80,6 +85,10 @@ export const Router = createBrowserRouter([
       {
         path: 'service-upload',
         Component: ServiceUpload,
+      },
+      {
+        path: 'booking-list',
+        Component: BookingList,
       },
     ],
   },

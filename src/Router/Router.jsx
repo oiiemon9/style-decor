@@ -6,6 +6,7 @@ import Register from '../page/Register/Register';
 import Dashboard from '../components/Dashboard/Dashboard';
 import DashboardRoot from '../Layouts/DashboardRoot';
 import Users from '../components/Dashboard/Users/Users';
+import ServiceUpload from '../components/Dashboard/ServiceUpload/ServiceUpload';
 
 export const Router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const Router = createBrowserRouter([
       {
         path: 'users',
         Component: Users,
+      },
+      {
+        path: 'service-upload',
+        Component: ServiceUpload,
       },
     ],
   },

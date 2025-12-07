@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../Context/FirebaseProvider';
 import useAxios from '../../CustomHook/useAxios';
 import { useForm } from 'react-hook-form';
@@ -10,6 +10,7 @@ const Login = () => {
     useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const axiosInstance = useAxios();
+  const location = useLocation();
   const navigate = useNavigate();
   const {
     register,
@@ -30,7 +31,7 @@ const Login = () => {
           photoURL: user.photoURL,
         });
         console.log('User data saved:', res.data);
-        navigate('/');
+        navigate(location.state || '/');
       }
     } catch (error) {
       console.error('Google login error:', error);
@@ -45,7 +46,7 @@ const Login = () => {
       const user = result.user;
       setLoginUser(user);
       toast.success('Login Successful');
-      navigate('/');
+      navigate(location.state || '/');
     } catch (error) {
       toast.error(error.message);
     } finally {

@@ -2,11 +2,18 @@ import React, { use, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/FirebaseProvider';
 import { useParams } from 'react-router';
 import useAxiosSecure from '../../CustomHook/useAxiosSecure';
+import { useForm } from 'react-hook-form';
 
 const BookNow = () => {
   const { loginUser } = use(AuthContext);
   const axiosInstance = useAxiosSecure();
   const [bookService, setBookService] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const [quantity, setQuantity] = useState(1);
 
@@ -23,11 +30,28 @@ const BookNow = () => {
     bookService();
   }, []);
 
+  const handelConfirmBooking = async (data) => {
+    console.log(data);
+    data.serviceId = bookService?._id;
+    data.serviceTitle = bookService?.serviceTitle;
+    data.quantity = quantity;
+    data.totalPrice = bookService?.price * quantity;
+    data.paymentStatus = 'pending';
+    if (data.payment === 'online') {
+      const res = await axiosInstance.post('/create-checkout-session', data);
+      console.log(res.data);
+      window.location.href = res.data.url;
+    }
+  };
+
   return (
     <div>
       <section className="bg-background-light dark:bg-background-dark  p-4 sm:p-6 md:p-8 flex items-center justify-center font-display">
         <div className="w-full container mx-auto rounded-3xl p-6 sm:p-8 md:p-12 border border-gray-300">
-          <form className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <form
+            onSubmit={handleSubmit(handelConfirmBooking)}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+          >
             <div className="lg:col-span-7">
               <nav className="text-sm text-gray-500 dark:text-gray-400 mb-6">
                 <a
@@ -56,24 +80,36 @@ const BookNow = () => {
                       Name
                     </label>
                     <input
+                      {...register('name', { required: true })}
                       className="w-full bg-gray-100 dark:bg-gray-800 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg p-3 text-gray-900 dark:text-gray-100 placeholder-gray-500"
                       type="text"
                       placeholder="Your Name"
                       defaultValue={loginUser?.displayName}
                       readOnly
                     />
+                    {errors.name && (
+                      <span className="text-red-500 text-sm">
+                        This field is required
+                      </span>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
                       Email
                     </label>
                     <input
+                      {...register('email', { required: true })}
                       className="w-full bg-gray-100 dark:bg-gray-800 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg p-3 text-gray-900 dark:text-gray-100 placeholder-gray-500"
                       type="text"
                       placeholder="Your Email"
                       defaultValue={loginUser?.email}
                       readOnly
                     />
+                    {errors.email && (
+                      <span className="text-red-500 text-sm">
+                        This field is required
+                      </span>
+                    )}
                   </div>
 
                   <div>
@@ -81,28 +117,50 @@ const BookNow = () => {
                       Location
                     </label>
                     <input
+                      {...register('location', { required: true })}
                       className="w-full bg-gray-100 dark:bg-gray-800 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg p-3 text-gray-900 dark:text-gray-100 placeholder-gray-500"
                       id="city-state"
                       type="text"
                       placeholder="Address..."
                     />
+                    {errors.location && (
+                      <span className="text-red-500 text-sm">
+                        This field is required
+                      </span>
+                    )}
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
-                      Phone number
+                      Phone Number
                     </label>
-                    <input
-                      className="w-full bg-gray-100 dark:bg-gray-800 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg p-3 text-gray-900 dark:text-gray-100 placeholder-gray-500"
-                      type="number"
-                      placeholder="+880 1*** *** ***"
-                    />
+
+                    <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700 focus-within:ring-2 focus-within:ring-black">
+                      <span className="px-3 py-3 text-gray-600 dark:text-gray-300 text-sm font-medium bg-gray-200 dark:bg-gray-700 border-r border-gray-300 dark:border-gray-600 select-none">
+                        +880
+                      </span>
+
+                      <input
+                        {...register('phone', { required: true })}
+                        type="tel"
+                        maxLength={11}
+                        placeholder="1XXXXXXXXX"
+                        className="w-full p-3 bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:outline-none"
+                      />
+                    </div>
+
+                    {errors.phone && (
+                      <span className="text-red-500 text-sm mt-1">
+                        Phone number is required
+                      </span>
+                    )}
                   </div>
                   <div className="sm:col-span-2">
                     <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
                       Note
                     </label>
                     <textarea
+                      {...register('note')}
                       className="w-full bg-gray-100 dark:bg-gray-800 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg p-3 text-gray-900 dark:text-gray-100 placeholder-gray-500"
                       type="text"
                     />
@@ -113,7 +171,7 @@ const BookNow = () => {
             <div className="lg:col-span-5">
               <div className="bg-white dark:bg-gray-900/50 rounded-2xl p-6 sm:p-8 shadow-lg">
                 <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">
-                  Book summary
+                  Service summary
                 </h2>
                 <div className="space-y-6">
                   <div className="flex items-center space-x-4">
@@ -167,18 +225,18 @@ const BookNow = () => {
                 <div className="border-t border-gray-200 dark:border-gray-700 my-8"></div>
                 <div className="flex justify-between items-center text-lg">
                   <span className="font-semibold text-gray-800 dark:text-gray-100">
-                    Order total
+                    Service total
                   </span>
                   <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                    $110.80
+                    ${bookService?.price * quantity}
                   </span>
                 </div>
                 <div className="mt-8 flex justify-between items-center">
                   <div className="flex gap-2 flex-col text-sm">
                     <label className="flex items-center gap-2 cursor-pointer  rounded-lg ">
                       <input
+                        {...register('payment')}
                         type="radio"
-                        name="payment"
                         value="online"
                         defaultChecked
                         className="accent-blue-600 w-4 h-4"
@@ -188,16 +246,19 @@ const BookNow = () => {
 
                     <label className="flex items-center gap-2 cursor-pointer   rounded-lg">
                       <input
+                        {...register('payment')}
                         type="radio"
-                        name="payment"
                         value="cash"
                         className="accent-blue-600 w-4 h-4"
                       />
                       <span className="font-medium">Cash on Delivery</span>
                     </label>
                   </div>
-                  <button type="submit" className="btn">
-                    Book Now
+                  <button
+                    type="submit"
+                    className="btn btn-primary rounded-full"
+                  >
+                    Confirm booking
                   </button>
                 </div>
               </div>

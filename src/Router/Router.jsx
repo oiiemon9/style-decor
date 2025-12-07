@@ -10,6 +10,9 @@ import ServiceUpload from '../components/Dashboard/ServiceUpload/ServiceUpload';
 import Services from '../page/Services/Services';
 import ServiceInfo from '../page/ServiceInfo/ServiceInfo';
 import BookNow from '../page/BookNow/BookNow';
+import UserPrivateRoute from '../PrivateRoute/User/UserPrivateRoute';
+import PaymentSuccess from '../page/PaymentSuccess/PaymentSuccess';
+import PaymentCancel from '../page/PaymentCancel/PaymentCancel';
 
 export const Router = createBrowserRouter([
   {
@@ -30,7 +33,27 @@ export const Router = createBrowserRouter([
       },
       {
         path: 'services/:serviceId/book-now',
-        Component: BookNow,
+        element: (
+          <UserPrivateRoute>
+            <BookNow />
+          </UserPrivateRoute>
+        ),
+      },
+      {
+        path: 'payment-success',
+        element: (
+          <UserPrivateRoute>
+            <PaymentSuccess />
+          </UserPrivateRoute>
+        ),
+      },
+      {
+        path: 'payment-failed',
+        element: (
+          <UserPrivateRoute>
+            <PaymentCancel></PaymentCancel>
+          </UserPrivateRoute>
+        ),
       },
       {
         path: 'login',

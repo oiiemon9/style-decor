@@ -24,7 +24,8 @@ const ServiceUpload = () => {
       import.meta.env.VITE_IMGBB_key
     }`;
     const imageRes = await axios.post(imageAPIUrl, imageData);
-    const imageUrl = imageRes.data.data.url;
+    const imageUrl = imageRes.data.data.display_url;
+    console.log('Image URL:', imageUrl);
     data.serviceImage = imageUrl;
 
     data.createdByEmail = loginUser?.email;

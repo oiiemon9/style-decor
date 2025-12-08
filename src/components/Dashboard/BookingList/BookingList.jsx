@@ -6,6 +6,7 @@ const BookingList = () => {
   const axiosInstance = useAxiosSecure();
   const [bookingItem, setBookingItem] = useState([]);
   const [decorators, setDecorators] = useState([]);
+  const [selectBookingId, setSelectBookingId] = useState('');
   const modalRef = useRef();
   useEffect(() => {
     const item = async () => {
@@ -19,7 +20,7 @@ const BookingList = () => {
     item();
   }, []);
 
-  const handelModal = async () => {
+  const handelModal = async (id) => {
     try {
       const res = await axiosInstance.get('/available-decorator');
       setDecorators(res.data);
@@ -27,7 +28,23 @@ const BookingList = () => {
       console.log(error);
     }
 
+    setSelectBookingId(id);
+
     modalRef.current.showModal();
+  };
+
+  const handelDecorator = async (id) => {
+    const bookingId = selectBookingId;
+    console.log(bookingId);
+    try {
+      const res = await axiosInstance.patch(`/bookings-request/${id}`, {
+        bookingId,
+        status: 'pending',
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -87,9 +104,12 @@ const BookingList = () => {
                 <td>{item?.paymentStatus}</td>
                 <td>
                   {item?.decorator ? (
-                    ''
+                    <p>{item?.decorator}</p>
                   ) : (
-                    <button onClick={handelModal} className="btn">
+                    <button
+                      onClick={() => handelModal(item._id)}
+                      className="btn"
+                    >
                       Select
                     </button>
                   )}
@@ -137,7 +157,12 @@ const BookingList = () => {
 
                     <td>{decorator?.role}</td>
                     <td>
-                      <button className="btn btn-sm">Select</button>
+                      <button
+                        onClick={() => handelDecorator(decorator._id)}
+                        className="btn btn-sm"
+                      >
+                        Select
+                      </button>
                     </td>
                   </tr>
                 ))}

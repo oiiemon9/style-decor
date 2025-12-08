@@ -14,6 +14,7 @@ import UserPrivateRoute from '../PrivateRoute/User/UserPrivateRoute';
 import PaymentSuccess from '../page/PaymentSuccess/PaymentSuccess';
 import PaymentCancel from '../page/PaymentCancel/PaymentCancel';
 import BookingList from '../components/Dashboard/BookingList/BookingList';
+import DecoratorServices from '../components/Dashboard/Decorator/DecoratorServices/DecoratorServices';
 
 export const Router = createBrowserRouter([
   {
@@ -89,6 +90,10 @@ export const Router = createBrowserRouter([
       {
         path: 'booking-list',
         Component: BookingList,
+      },
+      {
+        path: 'decorator-services',
+        Component: DecoratorServices,
       },
     ],
   },

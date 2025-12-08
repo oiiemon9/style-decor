@@ -199,6 +199,38 @@ const DashboardRoot = () => {
                   <span className="is-drawer-close:hidden">Booking List</span>
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/dashboard/decorator-services"
+                  className={({ isActive }) =>
+                    `is-drawer-close:tooltip is-drawer-close:tooltip-right flex ${
+                      isActive ? 'text-primary bg-gray-200 ' : ''
+                    }`
+                  }
+                  data-tip="Booking List"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-list-icon lucide-list"
+                  >
+                    <path d="M3 5h.01" />
+                    <path d="M3 12h.01" />
+                    <path d="M3 19h.01" />
+                    <path d="M8 5h13" />
+                    <path d="M8 12h13" />
+                    <path d="M8 19h13" />
+                  </svg>
+                  <span className="is-drawer-close:hidden">Booking List</span>
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>

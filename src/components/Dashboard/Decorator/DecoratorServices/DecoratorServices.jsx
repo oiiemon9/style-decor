@@ -9,7 +9,11 @@ const DecoratorServices = () => {
   const { loginUser } = use(AuthContext);
   const axiosInstance = useAxiosSecure();
 
-  const { data: decoratorItem = [], error } = useQuery({
+  const {
+    data: decoratorItem = [],
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ['decoratorEmail', loginUser?.email],
     queryFn: async () => {
       const res = await axiosInstance.get(
@@ -23,18 +27,90 @@ const DecoratorServices = () => {
 
   console.log(decoratorItem);
 
+  const handelStatus = async (id) => {
+    const info = {
+      bookingStatus: [
+        {
+          status: 'Assigned',
+          time: new Date(),
+        },
+      ],
+      decoratorInfo: {
+        name: loginUser?.displayName,
+        email: loginUser?.email,
+      },
+    };
+    try {
+      const res = await axiosInstance.patch(`/booking-status/${id}`, info);
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handelUpdate2 = async (id) => {
+    try {
+      const res = await axiosInstance.patch(`/booking-status-update/${id}`, {
+        update: 2,
+      });
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handelUpdate3 = async (id) => {
+    try {
+      const res = await axiosInstance.patch(`/booking-status-update/${id}`, {
+        update: 3,
+      });
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handelUpdate4 = async (id) => {
+    try {
+      const res = await axiosInstance.patch(`/booking-status-update/${id}`, {
+        update: 4,
+      });
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handelUpdate5 = async (id) => {
+    try {
+      const res = await axiosInstance.patch(`/booking-status-update/${id}`, {
+        update: 5,
+      });
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handelUpdate6 = async (id) => {
+    try {
+      const res = await axiosInstance.patch(`/booking-status-update/${id}`, {
+        update: 6,
+      });
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 py-10 ">
       <div className="">
         <header className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-text-light dark:text-text-dark">
-            Booking List
+            Decorator Services List
           </h1>
         </header>
       </div>
 
       <div className="overflow-x-auto border rounded-2xl border-gray-300">
-        <table className="table">
+        <table className="table text-nowrap">
           {/* head */}
           <thead>
             <tr>
@@ -45,6 +121,7 @@ const DecoratorServices = () => {
 
               <th>Service Date</th>
               <th>Total Price</th>
+              <th>Status</th>
               <th>Update Status</th>
             </tr>
           </thead>
@@ -104,8 +181,63 @@ const DecoratorServices = () => {
                   <p>${service?.bookingInfo?.totalPrice}</p>
                 </td>
                 <td>
+                  <p>
+                    {
+                      service?.bookingInfo?.bookingStatus[
+                        service?.bookingInfo?.bookingStatus.length - 1
+                      ]?.status
+                    }
+                  </p>
+                </td>
+
+                <td>
                   {service?.status === 'pending' && (
-                    <button className="btn">Accept booking</button>
+                    <button
+                      onClick={() => handelStatus(service?.bookingInfo?._id)}
+                      className="btn"
+                    >
+                      Accept booking
+                    </button>
+                  )}
+                  {service?.bookingInfo?.bookingStatus.length === 1 && (
+                    <button
+                      onClick={() => handelUpdate2(service?.bookingInfo?._id)}
+                      className="btn text-nowrap"
+                    >
+                      Update (Planning Phase)
+                    </button>
+                  )}
+                  {service?.bookingInfo?.bookingStatus.length === 2 && (
+                    <button
+                      onClick={() => handelUpdate3(service?.bookingInfo?._id)}
+                      className="btn text-nowrap"
+                    >
+                      Update (Materials Prepared)
+                    </button>
+                  )}
+                  {service?.bookingInfo?.bookingStatus.length === 3 && (
+                    <button
+                      onClick={() => handelUpdate4(service?.bookingInfo?._id)}
+                      className="btn text-nowrap"
+                    >
+                      Update (On the Way to Venue)
+                    </button>
+                  )}
+                  {service?.bookingInfo?.bookingStatus.length === 4 && (
+                    <button
+                      onClick={() => handelUpdate5(service?.bookingInfo?._id)}
+                      className="btn text-nowrap"
+                    >
+                      Update (Setup in Progress)
+                    </button>
+                  )}
+                  {service?.bookingInfo?.bookingStatus.length === 5 && (
+                    <button
+                      onClick={() => handelUpdate6(service?.bookingInfo?._id)}
+                      className="btn text-nowrap"
+                    >
+                      Update (Completed)
+                    </button>
                   )}
                 </td>
               </tr>

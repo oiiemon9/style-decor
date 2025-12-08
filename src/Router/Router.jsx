@@ -15,6 +15,7 @@ import PaymentSuccess from '../page/PaymentSuccess/PaymentSuccess';
 import PaymentCancel from '../page/PaymentCancel/PaymentCancel';
 import BookingList from '../components/Dashboard/BookingList/BookingList';
 import DecoratorServices from '../components/Dashboard/Decorator/DecoratorServices/DecoratorServices';
+import CompleteService from '../components/Dashboard/Decorator/CompleteService/CompleteService';
 
 export const Router = createBrowserRouter([
   {
@@ -94,6 +95,10 @@ export const Router = createBrowserRouter([
       {
         path: 'decorator-services',
         Component: DecoratorServices,
+      },
+      {
+        path: 'compete-services',
+        Component: CompleteService,
       },
     ],
   },

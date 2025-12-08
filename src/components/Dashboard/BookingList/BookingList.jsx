@@ -1,24 +1,34 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useAxiosSecure from '../../../CustomHook/useAxiosSecure';
 import { format } from 'date-fns';
+import { useQuery } from '@tanstack/react-query';
 
 const BookingList = () => {
   const axiosInstance = useAxiosSecure();
-  const [bookingItem, setBookingItem] = useState([]);
+  // const [bookingItem, setBookingItem] = useState([]);
   const [decorators, setDecorators] = useState([]);
   const [selectBookingId, setSelectBookingId] = useState('');
   const modalRef = useRef();
-  useEffect(() => {
-    const item = async () => {
-      try {
-        const res = await axiosInstance.get('/bookings');
-        setBookingItem(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    item();
-  }, []);
+
+  const { data: bookingItem = [], refetch } = useQuery({
+    queryKey: ['bookingData'],
+    queryFn: async () => {
+      const res = await axiosInstance.get('/bookings');
+      return res.data;
+    },
+  });
+
+  // useEffect(() => {
+  //   const item = async () => {
+  //     try {
+  //       const res = await axiosInstance.get('/bookings');
+  //       setBookingItem(res.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   item();
+  // }, []);
 
   const handelModal = async (id) => {
     try {
@@ -41,7 +51,10 @@ const BookingList = () => {
         bookingId,
         status: 'pending',
       });
-      console.log(res);
+
+      refetch();
+
+      modalRef.current.close();
     } catch (error) {
       console.log(error);
     }
@@ -104,7 +117,15 @@ const BookingList = () => {
                 <td>{item?.paymentStatus}</td>
                 <td>
                   {item?.decorator ? (
-                    <p>{item?.decorator}</p>
+                    item?.decorator === 'pending' ? (
+                      <p>Pending</p>
+                    ) : (
+                      <>
+                        {' '}
+                        <p>{item?.decorator.name}</p>
+                        <p>{item?.decorator.email}</p>
+                      </>
+                    )
                   ) : (
                     <button
                       onClick={() => handelModal(item._id)}

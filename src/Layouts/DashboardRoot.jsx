@@ -187,7 +187,7 @@ const DashboardRoot = () => {
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="lucide lucide-list-icon lucide-list"
+                    className="lucide lucide-list-icon lucide-list"
                   >
                     <path d="M3 5h.01" />
                     <path d="M3 12h.01" />
@@ -207,7 +207,7 @@ const DashboardRoot = () => {
                       isActive ? 'text-primary bg-gray-200 ' : ''
                     }`
                   }
-                  data-tip="Booking List"
+                  data-tip="Decorator Services"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -219,16 +219,45 @@ const DashboardRoot = () => {
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="lucide lucide-list-icon lucide-list"
+                    class="lucide lucide-hand-helping-icon lucide-hand-helping"
                   >
-                    <path d="M3 5h.01" />
-                    <path d="M3 12h.01" />
-                    <path d="M3 19h.01" />
-                    <path d="M8 5h13" />
-                    <path d="M8 12h13" />
-                    <path d="M8 19h13" />
+                    <path d="M11 12h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 14" />
+                    <path d="m7 18 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+                    <path d="m2 13 6 6" />
                   </svg>
-                  <span className="is-drawer-close:hidden">Booking List</span>
+                  <span className="is-drawer-close:hidden">
+                    Decorator Services
+                  </span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/compete-services"
+                  className={({ isActive }) =>
+                    `is-drawer-close:tooltip is-drawer-close:tooltip-right flex ${
+                      isActive ? 'text-primary bg-gray-200 ' : ''
+                    }`
+                  }
+                  data-tip="Compete Services"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-check-check-icon lucide-check-check"
+                  >
+                    <path d="M18 6 7 17l-5-5" />
+                    <path d="m22 10-7.5 7.5L13 16" />
+                  </svg>
+                  <span className="is-drawer-close:hidden">
+                    Compete Services
+                  </span>
                 </NavLink>
               </li>
             </ul>

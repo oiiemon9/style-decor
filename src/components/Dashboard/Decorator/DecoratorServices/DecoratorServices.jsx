@@ -92,6 +92,7 @@ const DecoratorServices = () => {
     try {
       const res = await axiosInstance.patch(`/booking-status-update/${id}`, {
         update: 6,
+        decoratorEmail: loginUser?.email,
       });
       refetch();
     } catch (error) {
@@ -182,11 +183,9 @@ const DecoratorServices = () => {
                 </td>
                 <td>
                   <p>
-                    {
-                      service?.bookingInfo?.bookingStatus[
-                        service?.bookingInfo?.bookingStatus.length - 1
-                      ]?.status
-                    }
+                    {service?.bookingInfo?.bookingStatus?.[
+                      service?.bookingInfo?.bookingStatus?.length - 1
+                    ]?.status || 'No Status'}
                   </p>
                 </td>
 
@@ -199,7 +198,7 @@ const DecoratorServices = () => {
                       Accept booking
                     </button>
                   )}
-                  {service?.bookingInfo?.bookingStatus.length === 1 && (
+                  {service?.bookingInfo?.bookingStatus?.length === 1 && (
                     <button
                       onClick={() => handelUpdate2(service?.bookingInfo?._id)}
                       className="btn text-nowrap"
@@ -207,7 +206,7 @@ const DecoratorServices = () => {
                       Update (Planning Phase)
                     </button>
                   )}
-                  {service?.bookingInfo?.bookingStatus.length === 2 && (
+                  {service?.bookingInfo?.bookingStatus?.length === 2 && (
                     <button
                       onClick={() => handelUpdate3(service?.bookingInfo?._id)}
                       className="btn text-nowrap"
@@ -215,7 +214,7 @@ const DecoratorServices = () => {
                       Update (Materials Prepared)
                     </button>
                   )}
-                  {service?.bookingInfo?.bookingStatus.length === 3 && (
+                  {service?.bookingInfo?.bookingStatus?.length === 3 && (
                     <button
                       onClick={() => handelUpdate4(service?.bookingInfo?._id)}
                       className="btn text-nowrap"
@@ -223,7 +222,7 @@ const DecoratorServices = () => {
                       Update (On the Way to Venue)
                     </button>
                   )}
-                  {service?.bookingInfo?.bookingStatus.length === 4 && (
+                  {service?.bookingInfo?.bookingStatus?.length === 4 && (
                     <button
                       onClick={() => handelUpdate5(service?.bookingInfo?._id)}
                       className="btn text-nowrap"
@@ -231,7 +230,7 @@ const DecoratorServices = () => {
                       Update (Setup in Progress)
                     </button>
                   )}
-                  {service?.bookingInfo?.bookingStatus.length === 5 && (
+                  {service?.bookingInfo?.bookingStatus?.length === 5 && (
                     <button
                       onClick={() => handelUpdate6(service?.bookingInfo?._id)}
                       className="btn text-nowrap"

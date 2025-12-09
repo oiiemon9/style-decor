@@ -109,9 +109,8 @@ const DecoratorServices = () => {
           </h1>
         </header>
       </div>
-
-      <div className="overflow-x-auto border rounded-2xl border-gray-300">
-        {decoratorItem.length > 0 && (
+      {decoratorItem[0]?.bookingObjId ? (
+        <div className="overflow-x-auto border rounded-2xl border-gray-300">
           <table className="table text-nowrap">
             {/* head */}
             <thead>
@@ -172,7 +171,6 @@ const DecoratorServices = () => {
 
                   <td>
                     <p>
-                      {' '}
                       {format(
                         new Date(service?.bookingInfo?.serviceDate),
                         'dd MMMM yyyy'
@@ -244,8 +242,12 @@ const DecoratorServices = () => {
               ))}
             </tbody>
           </table>
-        )}
-      </div>
+        </div>
+      ) : (
+        <p className="text-center text-xl font-semibold text-gray-600">
+          Services not Found
+        </p>
+      )}
     </div>
   );
 };

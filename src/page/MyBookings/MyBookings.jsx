@@ -20,7 +20,7 @@ const MyBookings = () => {
   });
 
   return (
-    <div className="bg-gray-100 dark:bg-slate-900 min-h-screen py-10">
+    <div className=" py-10">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-slate-800 dark:text-white mb-2">
           My Bookings
@@ -51,7 +51,7 @@ const MyBookings = () => {
                     {booking?.serviceTitle}
                   </h2>
 
-                  {booking?.decorator === 'pending' ? (
+                  {booking?.decorator === 'pending' || !booking?.decorator ? (
                     <p className="text-sm text-slate-500 dark:text-slate-400">
                       Decorator: <span className="font-semibold">Pending</span>
                     </p>
@@ -89,7 +89,9 @@ const MyBookings = () => {
                     </p>
                   </div>
                   <div>
-                    <button className="btn btn-error btn-sm">Cancel</button>
+                    {booking?.bookingStatus?.length !== 6 && (
+                      <button className="btn btn-error btn-sm">Cancel</button>
+                    )}
                   </div>
                 </div>
               </div>

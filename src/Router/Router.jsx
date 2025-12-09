@@ -18,6 +18,7 @@ import DecoratorServices from '../components/Dashboard/Decorator/DecoratorServic
 import CompleteService from '../components/Dashboard/Decorator/CompleteService/CompleteService';
 import DecoratorPrivateRoute from '../PrivateRoute/Decorator/DecoratorPrivateRoute';
 import AdminPrivateRoute from '../PrivateRoute/Admin/AdminPrivateRoute';
+import MyBookings from '../page/MyBookings/MyBookings';
 
 export const Router = createBrowserRouter([
   {
@@ -57,6 +58,14 @@ export const Router = createBrowserRouter([
         element: (
           <UserPrivateRoute>
             <PaymentCancel></PaymentCancel>
+          </UserPrivateRoute>
+        ),
+      },
+      {
+        path: 'my-bookings',
+        element: (
+          <UserPrivateRoute>
+            <MyBookings></MyBookings>
           </UserPrivateRoute>
         ),
       },

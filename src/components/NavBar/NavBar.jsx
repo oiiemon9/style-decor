@@ -146,6 +146,9 @@ const NavBar = () => {
                     <a>Settings</a>
                   </li>
                   <li>
+                    <Link to="/my-bookings">My Bookings</Link>
+                  </li>
+                  <li>
                     <Link to="/dashboard">Dashboard</Link>
                   </li>
                   <li>

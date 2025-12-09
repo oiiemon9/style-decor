@@ -39,9 +39,7 @@ const FirebaseProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(Auth, async (currentUser) => {
       setLoginUser(currentUser);
-
       if (currentUser) {
-        console.log(currentUser);
         const res = await axiosInstance.get(
           `/user-role?email=${currentUser.email}`
         );

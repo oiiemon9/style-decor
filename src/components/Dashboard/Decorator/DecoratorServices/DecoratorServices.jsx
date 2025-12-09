@@ -111,138 +111,140 @@ const DecoratorServices = () => {
       </div>
 
       <div className="overflow-x-auto border rounded-2xl border-gray-300">
-        <table className="table text-nowrap">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>User Name</th>
-              <th>Service</th>
-              <th>Payment Status</th>
-              <th>location</th>
+        {decoratorItem.length > 0 && (
+          <table className="table text-nowrap">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>User Name</th>
+                <th>Service</th>
+                <th>Payment Status</th>
+                <th>location</th>
 
-              <th>Service Date</th>
-              <th>Total Price</th>
-              <th>Status</th>
-              <th>Update Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {decoratorItem.map((service, i) => (
-              <tr key={i}>
-                <td>
-                  <div>
-                    <div className="font-bold">
-                      {service?.bookingInfo?.name}
-                    </div>
-                    <div className="text-sm opacity-50">
-                      {service?.bookingInfo?.email}
-                    </div>
-                    <div className="text-sm opacity-50">
-                      {service?.bookingInfo?.phone}
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
-                        <img src={service?.bookingInfo?.serviceImage} />
-                      </div>
-                    </div>
+                <th>Service Date</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Update Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {decoratorItem.map((service, i) => (
+                <tr key={i}>
+                  <td>
                     <div>
                       <div className="font-bold">
-                        {service?.bookingInfo?.serviceTitle}
+                        {service?.bookingInfo?.name}
+                      </div>
+                      <div className="text-sm opacity-50">
+                        {service?.bookingInfo?.email}
+                      </div>
+                      <div className="text-sm opacity-50">
+                        {service?.bookingInfo?.phone}
                       </div>
                     </div>
-                  </div>
-                </td>
+                  </td>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                          <img src={service?.bookingInfo?.serviceImage} />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-bold">
+                          {service?.bookingInfo?.serviceTitle}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
 
-                <td>
-                  <div className="text-sm opacity-50">
-                    {service?.bookingInfo?.paymentStatus}
-                  </div>
-                </td>
+                  <td>
+                    <div className="text-sm opacity-50">
+                      {service?.bookingInfo?.paymentStatus}
+                    </div>
+                  </td>
 
-                <td>
-                  <div className="text-sm opacity-50">
-                    {service?.bookingInfo?.location}
-                  </div>
-                </td>
+                  <td>
+                    <div className="text-sm opacity-50">
+                      {service?.bookingInfo?.location}
+                    </div>
+                  </td>
 
-                <td>
-                  <p>
-                    {' '}
-                    {format(
-                      new Date(service?.bookingInfo?.serviceDate),
-                      'dd MMMM yyyy'
+                  <td>
+                    <p>
+                      {' '}
+                      {format(
+                        new Date(service?.bookingInfo?.serviceDate),
+                        'dd MMMM yyyy'
+                      )}
+                    </p>
+                  </td>
+                  <td>
+                    <p>${service?.bookingInfo?.totalPrice}</p>
+                  </td>
+                  <td>
+                    <p>
+                      {service?.bookingInfo?.bookingStatus?.[
+                        service?.bookingInfo?.bookingStatus?.length - 1
+                      ]?.status || 'No Status'}
+                    </p>
+                  </td>
+
+                  <td>
+                    {service?.status === 'pending' && (
+                      <button
+                        onClick={() => handelStatus(service?.bookingInfo?._id)}
+                        className="btn"
+                      >
+                        Accept booking
+                      </button>
                     )}
-                  </p>
-                </td>
-                <td>
-                  <p>${service?.bookingInfo?.totalPrice}</p>
-                </td>
-                <td>
-                  <p>
-                    {service?.bookingInfo?.bookingStatus?.[
-                      service?.bookingInfo?.bookingStatus?.length - 1
-                    ]?.status || 'No Status'}
-                  </p>
-                </td>
-
-                <td>
-                  {service?.status === 'pending' && (
-                    <button
-                      onClick={() => handelStatus(service?.bookingInfo?._id)}
-                      className="btn"
-                    >
-                      Accept booking
-                    </button>
-                  )}
-                  {service?.bookingInfo?.bookingStatus?.length === 1 && (
-                    <button
-                      onClick={() => handelUpdate2(service?.bookingInfo?._id)}
-                      className="btn text-nowrap"
-                    >
-                      Update (Planning Phase)
-                    </button>
-                  )}
-                  {service?.bookingInfo?.bookingStatus?.length === 2 && (
-                    <button
-                      onClick={() => handelUpdate3(service?.bookingInfo?._id)}
-                      className="btn text-nowrap"
-                    >
-                      Update (Materials Prepared)
-                    </button>
-                  )}
-                  {service?.bookingInfo?.bookingStatus?.length === 3 && (
-                    <button
-                      onClick={() => handelUpdate4(service?.bookingInfo?._id)}
-                      className="btn text-nowrap"
-                    >
-                      Update (On the Way to Venue)
-                    </button>
-                  )}
-                  {service?.bookingInfo?.bookingStatus?.length === 4 && (
-                    <button
-                      onClick={() => handelUpdate5(service?.bookingInfo?._id)}
-                      className="btn text-nowrap"
-                    >
-                      Update (Setup in Progress)
-                    </button>
-                  )}
-                  {service?.bookingInfo?.bookingStatus?.length === 5 && (
-                    <button
-                      onClick={() => handelUpdate6(service?.bookingInfo?._id)}
-                      className="btn text-nowrap"
-                    >
-                      Update (Completed)
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    {service?.bookingInfo?.bookingStatus?.length === 1 && (
+                      <button
+                        onClick={() => handelUpdate2(service?.bookingInfo?._id)}
+                        className="btn text-nowrap"
+                      >
+                        Update (Planning Phase)
+                      </button>
+                    )}
+                    {service?.bookingInfo?.bookingStatus?.length === 2 && (
+                      <button
+                        onClick={() => handelUpdate3(service?.bookingInfo?._id)}
+                        className="btn text-nowrap"
+                      >
+                        Update (Materials Prepared)
+                      </button>
+                    )}
+                    {service?.bookingInfo?.bookingStatus?.length === 3 && (
+                      <button
+                        onClick={() => handelUpdate4(service?.bookingInfo?._id)}
+                        className="btn text-nowrap"
+                      >
+                        Update (On the Way to Venue)
+                      </button>
+                    )}
+                    {service?.bookingInfo?.bookingStatus?.length === 4 && (
+                      <button
+                        onClick={() => handelUpdate5(service?.bookingInfo?._id)}
+                        className="btn text-nowrap"
+                      >
+                        Update (Setup in Progress)
+                      </button>
+                    )}
+                    {service?.bookingInfo?.bookingStatus?.length === 5 && (
+                      <button
+                        onClick={() => handelUpdate6(service?.bookingInfo?._id)}
+                        className="btn text-nowrap"
+                      >
+                        Update (Completed)
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

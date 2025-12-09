@@ -8,6 +8,8 @@ import {
 } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
 import { Auth } from '../Firebase/firebase.init';
+import axios from 'axios';
+import useAxios from '../CustomHook/useAxios';
 
 export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
@@ -15,6 +17,8 @@ const googleProvider = new GoogleAuthProvider();
 const FirebaseProvider = ({ children }) => {
   const [loginUser, setLoginUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState('user');
+  const axiosInstance = useAxios();
 
   const registerUser = (email, password) => {
     return createUserWithEmailAndPassword(Auth, email, password);
@@ -33,8 +37,16 @@ const FirebaseProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(Auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(Auth, async (currentUser) => {
       setLoginUser(currentUser);
+
+      if (currentUser) {
+        console.log(currentUser);
+        const res = await axiosInstance.get(
+          `/user-role?email=${currentUser.email}`
+        );
+        setRole(res.data.role);
+      }
       setLoading(false);
     });
 
@@ -49,6 +61,7 @@ const FirebaseProvider = ({ children }) => {
     registerUser,
     login,
     loading,
+    role,
   };
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;
 };

@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { use, useEffect, useRef, useState } from 'react';
 import useAxiosSecure from '../../../CustomHook/useAxiosSecure';
 import { format } from 'date-fns';
 import { useQuery } from '@tanstack/react-query';
+import { AuthContext } from '../../../Context/FirebaseProvider';
 
 const BookingList = () => {
   const axiosInstance = useAxiosSecure();
-  // const [bookingItem, setBookingItem] = useState([]);
+  const { loginUser } = use(AuthContext);
   const [decorators, setDecorators] = useState([]);
   const [selectBookingId, setSelectBookingId] = useState('');
   const modalRef = useRef();
@@ -13,22 +14,10 @@ const BookingList = () => {
   const { data: bookingItem = [], refetch } = useQuery({
     queryKey: ['bookingData'],
     queryFn: async () => {
-      const res = await axiosInstance.get('/bookings');
+      const res = await axiosInstance.get(`/bookings?email=${loginUser.email}`);
       return res.data;
     },
   });
-
-  // useEffect(() => {
-  //   const item = async () => {
-  //     try {
-  //       const res = await axiosInstance.get('/bookings');
-  //       setBookingItem(res.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   item();
-  // }, []);
 
   const handelModal = async (id) => {
     try {

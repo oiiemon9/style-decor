@@ -16,6 +16,8 @@ import PaymentCancel from '../page/PaymentCancel/PaymentCancel';
 import BookingList from '../components/Dashboard/BookingList/BookingList';
 import DecoratorServices from '../components/Dashboard/Decorator/DecoratorServices/DecoratorServices';
 import CompleteService from '../components/Dashboard/Decorator/CompleteService/CompleteService';
+import DecoratorPrivateRoute from '../PrivateRoute/Decorator/DecoratorPrivateRoute';
+import AdminPrivateRoute from '../PrivateRoute/Admin/AdminPrivateRoute';
 
 export const Router = createBrowserRouter([
   {
@@ -82,23 +84,43 @@ export const Router = createBrowserRouter([
       },
       {
         path: 'users',
-        Component: Users,
+        element: (
+          <AdminPrivateRoute>
+            <Users></Users>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: 'service-upload',
-        Component: ServiceUpload,
+        element: (
+          <AdminPrivateRoute>
+            <ServiceUpload></ServiceUpload>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: 'booking-list',
-        Component: BookingList,
+        element: (
+          <AdminPrivateRoute>
+            <BookingList></BookingList>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: 'decorator-services',
-        Component: DecoratorServices,
+        element: (
+          <DecoratorPrivateRoute>
+            <DecoratorServices></DecoratorServices>
+          </DecoratorPrivateRoute>
+        ),
       },
       {
         path: 'compete-services',
-        Component: CompleteService,
+        element: (
+          <DecoratorPrivateRoute>
+            <CompleteService></CompleteService>
+          </DecoratorPrivateRoute>
+        ),
       },
     ],
   },

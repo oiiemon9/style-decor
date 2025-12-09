@@ -2,16 +2,18 @@ import React, { use, useRef, useState } from 'react';
 import useAxios from '../../../CustomHook/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../../Context/FirebaseProvider';
 
 const Users = () => {
   const axiosInstance = useAxios();
+  const { loginUser } = use(AuthContext);
   const [updatedUser, setUpdatedUser] = useState(null);
   const modalRef = useRef();
   const roleSelectRef = useRef();
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const res = await axiosInstance.get('/users');
+      const res = await axiosInstance.get(`/users?email=${loginUser.email}`);
       return res.data;
     },
   });

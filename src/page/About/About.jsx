@@ -45,7 +45,6 @@ const About = () => {
   };
   return (
     <div>
-      {/* Hero Section */}
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -63,7 +62,7 @@ const About = () => {
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold mb-6"
+            className="text-5xl md:text-7xl font-bold mb-6 serif-font"
           >
             Welcome to{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300">
@@ -82,7 +81,6 @@ const About = () => {
         </div>
       </motion.section>
 
-      {/* About StyleDecor */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
           <motion.div

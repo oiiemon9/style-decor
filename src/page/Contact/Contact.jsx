@@ -54,7 +54,6 @@ const Contact = () => {
   };
   return (
     <div>
-      {/* Hero Section */}
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -72,7 +71,7 @@ const Contact = () => {
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold mb-6"
+            className="text-5xl md:text-7xl font-bold mb-6 serif-font"
           >
             Get in{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-indigo-300">

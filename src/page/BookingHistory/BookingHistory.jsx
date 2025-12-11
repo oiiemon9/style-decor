@@ -1,61 +1,30 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { use } from 'react';
 import { AuthContext } from '../../Context/FirebaseProvider';
 import useAxiosSecure from '../../CustomHook/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { MoveRight } from 'lucide-react';
-import Swal from 'sweetalert2';
 
-const MyBookings = () => {
+const BookingHistory = () => {
   const { loginUser } = use(AuthContext);
   const axiosInstance = useAxiosSecure();
-
-  const { data: myBookings = [], refetch } = useQuery({
+  const { data: myBookings = [] } = useQuery({
     queryKey: ['myBookings', loginUser?.email],
     queryFn: async () => {
       const res = await axiosInstance.get(
-        `/my-bookings?email=${loginUser?.email}`
+        `/booking-history?email=${loginUser?.email}`
       );
       return res.data;
     },
   });
-
-  const handelCancel = async (id) => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Want to cancel your booking service?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, cancel it!',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const res = await axiosInstance.delete(`/my-bookings/${id}`);
-          if (res.data.deletedCount) {
-            Swal.fire({
-              title: 'Cancel!',
-              text: 'Your booking service has been cancel.',
-              icon: 'success',
-            });
-            refetch();
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    });
-  };
-
   return (
     <div className=" py-10">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-slate-800 dark:text-white mb-2">
-          My Bookings
+          Booking History
         </h1>
         <p className="text-slate-500 dark:text-slate-400 mb-8">
-          Track every booking from start to finish.
+          Your completed bookings
         </p>
 
         <div className="space-y-6">
@@ -117,12 +86,7 @@ const MyBookings = () => {
                   </div>
                   <div>
                     {booking?.bookingStatus?.length !== 6 && (
-                      <button
-                        onClick={() => handelCancel(booking?._id)}
-                        className="btn btn-error btn-sm"
-                      >
-                        Cancel
-                      </button>
+                      <button className="btn btn-error btn-sm">Cancel</button>
                     )}
                   </div>
                 </div>
@@ -171,4 +135,4 @@ const MyBookings = () => {
   );
 };
 
-export default MyBookings;
+export default BookingHistory;

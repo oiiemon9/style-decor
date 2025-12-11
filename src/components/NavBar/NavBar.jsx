@@ -109,22 +109,21 @@ const NavBar = () => {
             </ul>
           </div>
 
-          {/* Right Section */}
           <div className="flex items-center gap-4">
-            {/* User Authentication */}
             {loginUser ? (
               <div className="dropdown dropdown-end">
                 <button
                   tabIndex={0}
                   role="button"
-                  className="btn btn-ghost btn-circle avatar hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                  data-tip={loginUser.displayName}
+                  className="btn btn-ghost btn-circle avatar hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors tooltip tooltip-bottom"
                 >
-                  <div className="w-10 rounded-full border-2 border-blue-500">
+                  <div className="w-10 rounded-full border-2 border-purple-500 ">
                     <img
                       alt="User Avatar"
                       src={
                         loginUser?.photoURL ||
-                        'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
+                        'https://i.ibb.co.com/nNxJtvHB/download-66.png'
                       }
                     />
                   </div>
@@ -139,11 +138,12 @@ const NavBar = () => {
                   <li>
                     <Link to="/profile">Profile</Link>
                   </li>
-                  <li>
-                    <a>Settings</a>
-                  </li>
+
                   <li>
                     <Link to="/my-bookings">My Bookings</Link>
+                  </li>
+                  <li>
+                    <Link to="/booking-history">Booking History</Link>
                   </li>
                   <li>
                     <Link to="/dashboard">Dashboard</Link>
@@ -162,7 +162,6 @@ const NavBar = () => {
               </Link>
             )}
 
-            {/* Mobile Hamburger Menu */}
             <div className="lg:hidden">
               <Hamburger
                 size={20}

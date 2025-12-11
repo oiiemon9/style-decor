@@ -22,6 +22,7 @@ import MyBookings from '../page/MyBookings/MyBookings';
 import About from '../page/About/About';
 import Contact from '../page/Contact/Contact';
 import Profile from '../page/Profile/Profile';
+import BookingHistory from '../page/BookingHistory/BookingHistory';
 
 export const Router = createBrowserRouter([
   {
@@ -85,6 +86,14 @@ export const Router = createBrowserRouter([
         element: (
           <UserPrivateRoute>
             <MyBookings></MyBookings>
+          </UserPrivateRoute>
+        ),
+      },
+      {
+        path: 'booking-history',
+        element: (
+          <UserPrivateRoute>
+            <BookingHistory></BookingHistory>
           </UserPrivateRoute>
         ),
       },

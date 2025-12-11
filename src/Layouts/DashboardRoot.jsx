@@ -11,7 +11,6 @@ const DashboardRoot = () => {
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
-          {/* Navbar */}
           <nav className="navbar w-full bg-base-300">
             <label
               htmlFor="my-drawer-4"
@@ -36,10 +35,12 @@ const DashboardRoot = () => {
             </label>
             <div className="px-4">Navbar Title</div>
           </nav>
-          {/* Page content here */}
-          <div className="container mx-auto p-4">
+
+          <div>
             {' '}
-            <Outlet />
+            <div className="container mx-auto p-4">
+              <Outlet />
+            </div>
             <Footer />
           </div>
         </div>

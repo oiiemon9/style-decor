@@ -262,7 +262,7 @@ const BookNow = () => {
                       <span className="font-medium">Online Payment</span>
                     </label>
 
-                    <label className="flex items-center gap-2 cursor-pointer   rounded-lg">
+                    {/* <label className="flex items-center gap-2 cursor-pointer   rounded-lg">
                       <input
                         {...register('payment')}
                         type="radio"
@@ -270,7 +270,7 @@ const BookNow = () => {
                         className="accent-blue-600 w-4 h-4"
                       />
                       <span className="font-medium">Cash on Delivery</span>
-                    </label>
+                    </label> */}
                   </div>
                   <button
                     type="submit"

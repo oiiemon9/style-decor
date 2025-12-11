@@ -89,10 +89,10 @@ const WhyCooseUs = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-6 py-3 bg-white/20 backdrop-blur-md rounded-full text-sm font-semibold mb-6">
+          <span className="inline-block px-6 py-3 bg-white/20 backdrop-blur-md rounded-full text-sm font-semibold mb-6 ">
             Trusted by Thousands of Happy Clients
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 serif-font">
             Why Choose{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300">
               StyleDecor

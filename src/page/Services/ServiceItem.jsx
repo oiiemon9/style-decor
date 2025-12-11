@@ -25,7 +25,6 @@ const ServiceItem = ({ service }) => {
       className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col justify-between"
     >
       <div>
-        {/* Image Container with Overlay */}
         <div className="relative aspect-[4/3] overflow-hidden">
           <img
             src={serviceImage}
@@ -33,10 +32,8 @@ const ServiceItem = ({ service }) => {
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
           />
 
-          {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-          {/* Category Badge */}
           <div className="absolute top-4 left-4">
             <span className="px-4 py-2 bg-purple-600 text-white text-xs font-semibold rounded-full shadow-lg flex items-center gap-1">
               <Sparkles className="w-3 h-3" />
@@ -44,7 +41,6 @@ const ServiceItem = ({ service }) => {
             </span>
           </div>
 
-          {/* Price Badge on Bottom Right */}
           <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-5 py-3 rounded-full shadow-xl">
             <p className="text-2xl font-bold text-purple-700">
               ${price}
@@ -55,7 +51,6 @@ const ServiceItem = ({ service }) => {
           </div>
         </div>
 
-        {/* Card Content */}
         <div className="p-6 space-y-4">
           <h3 className="text-xl font-bold text-gray-800 line-clamp-2 group-hover:text-purple-700 transition-colors">
             {serviceTitle}
@@ -103,7 +98,6 @@ const ServiceItem = ({ service }) => {
         </motion.button>
       </div>
 
-      {/* Hover Shine Effect */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -inset-x-96 -top-10 h-96 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
       </div>

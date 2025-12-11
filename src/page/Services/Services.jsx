@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useAxios from '../../CustomHook/useAxios';
 import ServiceItem from './ServiceItem';
+import { MoveLeft, MoveRight, Ribbon } from 'lucide-react';
 
 const Services = () => {
   const axiosInstance = useAxios();
@@ -10,15 +11,19 @@ const Services = () => {
   const [category, setCategory] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [page, setPage] = useState(0);
+  const [skips, setSkips] = useState(0);
+  const [totalService, setTotalService] = useState(0);
 
   useEffect(() => {
     const dataFetch = async () => {
       setLoading(true);
       try {
         const res = await axiosInstance.get(
-          `/services?search=${searchText}&category=${category}&min=${minPrice}&max=${maxPrice}`
+          `/services?search=${searchText}&category=${category}&min=${minPrice}&max=${maxPrice}&limit=8&skip=${skips}`
         );
-        setServices(res.data);
+        setTotalService(res.data.total);
+        setServices(res.data.services);
       } catch (error) {
         console.log(error);
       } finally {
@@ -26,17 +31,35 @@ const Services = () => {
       }
     };
     dataFetch();
-  }, [searchText, category, minPrice, maxPrice]);
+  }, [searchText, category, minPrice, maxPrice, skips]);
 
-  console.log(services);
+  const handelPagination = (index) => {
+    setSkips(index * 8);
+    setPage(index);
+    scrollTop();
+  };
+
+  const handelPaginationBack = () => {
+    setSkips(skips - 8);
+    setPage(page - 1);
+  };
+  const handelPaginationNext = () => {
+    setSkips(skips + 8);
+    setPage(page + 1);
+  };
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <div className="min-h-screen">
       <div className="container mx-auto p-5">
-        {/* Simple Search Bar */}
         <div className="bg-white rounded-xl shadow-md p-6 mb-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-5">
-            Search Decoration Services
+            Decoration Services ({totalService})
           </h2>
 
           <div className="flex flex-col md:flex-row justify-between">
@@ -44,7 +67,7 @@ const Services = () => {
               {/* Search by Title */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Service Name
+                  Service Title
                 </label>
                 <input
                   onChange={(e) => setSearchText(e.target.value)}
@@ -113,6 +136,40 @@ const Services = () => {
             ))
           )}
         </div>
+        {totalService > 8 && (
+          <div className="mt-10 flex justify-center">
+            <div className="flex items-center gap-2 flex-wrap">
+              <button
+                onClick={handelPaginationBack}
+                className="btn"
+                disabled={page === 0}
+              >
+                <MoveLeft></MoveLeft>
+              </button>
+              {[...Array(Math.ceil(totalService / 8)).keys()].map(
+                (p, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handelPagination(index)}
+                    className={`btn ${
+                      index === page && 'bg-purple-600 text-white'
+                    }`}
+                  >
+                    {index + 1}
+                  </button>
+                )
+              )}
+              <button
+                onClick={handelPaginationNext}
+                disabled={page === Math.ceil(totalService / 8) - 1}
+                className="btn"
+              >
+                {' '}
+                <MoveRight></MoveRight>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

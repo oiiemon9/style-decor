@@ -27,7 +27,6 @@ const FeaturedServicesSection = ({ services = [] }) => {
   return (
     <section className="py-20 lg:py-28 bg-gradient-to-b from-purple-50 via-white to-gray-50">
       <div className="container mx-auto px-6">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +37,7 @@ const FeaturedServicesSection = ({ services = [] }) => {
             <Sparkles className="w-5 h-5" />
             Featured Decoration Plans
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 serif-font">
             Transform Your Event with
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
               {' '}
@@ -52,7 +51,6 @@ const FeaturedServicesSection = ({ services = [] }) => {
           </p>
         </motion.div>
 
-        {/* Services Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -65,7 +63,6 @@ const FeaturedServicesSection = ({ services = [] }) => {
           ))}
         </motion.div>
 
-        {/* CTA Bottom */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}

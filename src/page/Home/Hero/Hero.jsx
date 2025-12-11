@@ -4,14 +4,15 @@ import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
+import { Link } from 'react-router';
 
 const Hero = () => {
   // Premium nature images from Unsplash (replace with your own high-quality wallpaper images later)
   const heroImages = [
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
-    'https://images.unsplash.com/photo-1567016432779-5d9766d4f2cb?q=80&w=2070',
-    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2070',
-    'https://images.unsplash.com/photo-1618220048045-10a6dbdfc8d1?q=80&w=2070',
+    'https://i.ibb.co.com/5b1PzB4/download-56.png',
+    'https://i.ibb.co.com/B56D2W7N/download-52.png',
+    'https://i.ibb.co.com/YB0xzMQ1/Wedding.png',
+    'https://i.ibb.co.com/Qv6Ky1NQ/download-51.png',
   ];
   return (
     <section className="relative w-full h-screen min-h-[600px] max-h-[900px] overflow-hidden">
@@ -55,63 +56,50 @@ const Hero = () => {
         <div className="container mx-auto px-6 sm:px-8 lg:px-16 xl:px-24">
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-3">
-              <span className="inline-block bg-amber-500/90 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-xl animate-pulse">
-                New Collection 2025
+              <span className="inline-block  bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-xl animate-pulse">
+                Every Corner Deserves Luxury
               </span>
               <span className="h-px w-20 bg-white/30"></span>
             </div>
 
             <h1 className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-black text-white tracking-tight drop-shadow-2xl serif-font">
-              Transform Your Walls
+              Transform Your Space
               <br />
-              <span className="bg-gradient-to-r from-amber-400 via-orange-300 to-amber-500 bg-clip-text text-transparent">
-                Into Masterpieces
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                Decor That Inspires
               </span>
             </h1>
 
             {/* Subheading */}
             <p className="mt-6 text-sm text-gray-100 font-light max-w-2xl leading-relaxed opacity-95">
-              Elevate your space with our exclusive collection of luxury
-              wallpapers. Handcrafted designs. Unmatched quality. Timeless
-              elegance.
+              Professional decoration solutions for homes, weddings, offices,
+              seminars & events. Quality, creativity, and perfection in every
+              detail.
             </p>
 
             {/* CTA Buttons */}
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <a
-                href="#collections"
-                className="group inline-flex items-center justify-center gap-3 bg-amber-500 hover:bg-amber-600 text-black font-bold uppercase tracking-wider px-8 py-3 rounded-full text-sm transition-colors duration-300"
+              <Link
+                to="/services"
+                className="group inline-flex items-center gap-4 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-2xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
               >
-                Book Decoration Service
-                <svg
-                  className="w-5 h-5 group-hover:translate-x-2 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2.5}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </a>
+                <span>Decoration Services</span>
+              </Link>
             </div>
 
             {/* Trust Indicators */}
             <div className="mt-16 flex flex-wrap items-center gap-8 text-white/80 text-sm">
               <div className="flex items-center gap-2">
                 <span className="text-2xl">✔</span>
-                <span>10-Year Warranty</span>
+                <span>10,000+ Events Decorated</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-2xl">✔</span>
-                <span>Eco-Friendly Free Samples</span>
+                <span>4.9/5.0 Average Rating</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-2xl">✔</span>
-                <span>Eco-Friendly Materials</span>
+                <span>100% Client Satisfaction</span>
               </div>
             </div>
           </div>

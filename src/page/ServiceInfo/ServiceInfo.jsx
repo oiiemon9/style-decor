@@ -168,7 +168,7 @@ const ServiceInfo = () => {
                     ${service.price}
                   </p>
                   <p className="text-gray-600 mt-2">
-                    per {service.unit.replace('-', ' ')}
+                    {service.unit.replace('-', ' ')}
                   </p>
                 </div>
 

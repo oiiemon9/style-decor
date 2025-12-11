@@ -75,7 +75,7 @@ const FeaturedServicesSection = ({ services = [] }) => {
         >
           <Link
             to="/services"
-            className="group inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-lg font-semibold rounded-2xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+            className="group inline-flex items-center gap-4 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-2xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
           >
             <span>View All Decoration Services</span>
             <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />

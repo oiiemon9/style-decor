@@ -97,8 +97,8 @@ const NavBar = () => {
                     className={({ isActive }) =>
                       `font-medium transition-colors duration-300 ${
                         isActive
-                          ? 'text-blue-600 dark:text-blue-400'
-                          : 'text-gray-700 dark:text-gray-300 hover:text-blue-600'
+                          ? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600'
+                          : 'text-gray-700 dark:text-gray-300 hover:text-purple-600'
                       }`
                     }
                   >

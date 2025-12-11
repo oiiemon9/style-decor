@@ -4,6 +4,7 @@ import { IoMdPhotos } from 'react-icons/io';
 import useAxiosSecure from '../../../CustomHook/useAxiosSecure';
 import axios from 'axios';
 import { AuthContext } from '../../../Context/FirebaseProvider';
+import Swal from 'sweetalert2';
 
 const ServiceUpload = () => {
   const axiosInstance = useAxiosSecure();
@@ -12,11 +13,13 @@ const ServiceUpload = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const [imagePreview, setImagePreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleServiceUpload = async (data) => {
+    setIsLoading(true);
     const file = data.serviceImage[0];
     const imageData = new FormData();
     imageData.append('image', file);
@@ -33,9 +36,19 @@ const ServiceUpload = () => {
 
     try {
       const res = await axiosInstance.post('/service-upload', data);
-      console.log('Response:', res.data);
+      if (res.data.insertedId) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Your Service uploaded',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        reset();
+      }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 

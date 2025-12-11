@@ -19,6 +19,8 @@ import CompleteService from '../components/Dashboard/Decorator/CompleteService/C
 import DecoratorPrivateRoute from '../PrivateRoute/Decorator/DecoratorPrivateRoute';
 import AdminPrivateRoute from '../PrivateRoute/Admin/AdminPrivateRoute';
 import MyBookings from '../page/MyBookings/MyBookings';
+import About from '../page/About/About';
+import Contact from '../page/Contact/Contact';
 
 export const Router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ export const Router = createBrowserRouter([
       {
         path: 'services',
         Component: Services,
+      },
+      {
+        path: 'about',
+        Component: About,
+      },
+      {
+        path: 'contact',
+        Component: Contact,
       },
       {
         path: 'services/:serviceId',

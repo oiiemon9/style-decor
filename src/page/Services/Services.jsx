@@ -18,10 +18,12 @@ const Services = () => {
     dataFetch();
   }, []);
 
+  console.log(services);
+
   return (
     <div className="container mx-auto p-4">
       services page
-      <div className="grid grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
         {services.map((service) => (
           <ServiceItem key={service._id} service={service}></ServiceItem>
         ))}

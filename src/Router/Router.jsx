@@ -21,6 +21,7 @@ import AdminPrivateRoute from '../PrivateRoute/Admin/AdminPrivateRoute';
 import MyBookings from '../page/MyBookings/MyBookings';
 import About from '../page/About/About';
 import Contact from '../page/Contact/Contact';
+import Profile from '../page/Profile/Profile';
 
 export const Router = createBrowserRouter([
   {
@@ -52,6 +53,14 @@ export const Router = createBrowserRouter([
         element: (
           <UserPrivateRoute>
             <BookNow />
+          </UserPrivateRoute>
+        ),
+      },
+      {
+        path: 'profile',
+        element: (
+          <UserPrivateRoute>
+            <Profile />
           </UserPrivateRoute>
         ),
       },

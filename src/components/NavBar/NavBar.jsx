@@ -137,10 +137,7 @@ const NavBar = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <li>
-                    <a className="justify-between">
-                      Profile
-                      <span className="badge badge-primary">New</span>
-                    </a>
+                    <Link to="/profile">Profile</Link>
                   </li>
                   <li>
                     <a>Settings</a>

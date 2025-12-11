@@ -11,7 +11,8 @@ const CustomerTestimonials = () => {
       rating: 5,
       date: '10 December 2025',
       text: 'StyleDecor turned our dream wedding into reality! The entrance gate and stage decoration were absolutely breathtaking. Everyone kept asking who did it. Highly recommended!',
-      avatar: 'https://i.ibb.co.com/0jK7Z3P/ayesha.jpg',
+      avatar:
+        'https://images.unsplash.com/photo-1708443683276-8a3eb30faef2?q=80&w=160&h=160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       verified: true,
     },
     {
@@ -21,7 +22,8 @@ const CustomerTestimonials = () => {
       rating: 5,
       date: '28 November 2025',
       text: 'From booking to final setup — everything was so smooth. The team arrived on time, used premium materials, and the lighting was magical. Best decision we made!',
-      avatar: 'https://i.ibb.co.com/8rL4v9m/kamal.jpg',
+      avatar:
+        'https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80',
       verified: true,
     },
     {
@@ -31,7 +33,8 @@ const CustomerTestimonials = () => {
       rating: 5,
       date: '15 October 2025',
       text: 'Completely transformed our living room and bedroom. The attention to detail and color coordination was perfect. Now our home feels like a 5-star hotel!',
-      avatar: 'https://i.ibb.co.com/3dYv7vP/fatema.jpg',
+      avatar:
+        'https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80',
       verified: true,
     },
   ];
@@ -53,7 +56,7 @@ const CustomerTestimonials = () => {
     },
   };
   return (
-    <section className="pb-20 lg:my-28 bg-gradient-to-b from-purple-50 via-white to-gray-50">
+    <section className="my-28 ">
       <div className="container mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -62,11 +65,11 @@ const CustomerTestimonials = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-purple-100 rounded-full text-purple-700 font-semibold text-sm mb-6">
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-purple-100 rounded-full text-purple-700 font-semibold text-sm mb-6 ">
             <Heart className="w-5 h-5" />
             Loved by Our Clients
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 serif-font ">
             What Our Happy Clients
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
               {' '}

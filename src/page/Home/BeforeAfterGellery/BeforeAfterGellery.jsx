@@ -73,7 +73,7 @@ const BeforeAfterGellery = () => {
   };
 
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-b from-gray-50 via-white to-purple-50">
+    <section className="my-28 ">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div
@@ -86,9 +86,14 @@ const BeforeAfterGellery = () => {
             <Sparkles className="w-5 h-5" />
             Our Recent Masterpieces
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
-            Real Events, Real Transformations
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 serif-font ">
+            Real Events,
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+              {' '}
+              Real Transformations
+            </span>
           </h2>
+
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             From ordinary venues to breathtaking celebrations — every detail
             crafted with passion and precision.

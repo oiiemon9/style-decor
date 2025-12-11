@@ -5,6 +5,8 @@ import useAxios from '../../CustomHook/useAxios';
 import WhyCooseUs from './WhyCooseUs/WhyCooseUs';
 import BeforeAfterGellery from './BeforeAfterGellery/BeforeAfterGellery';
 import CustomerTestimonials from './CustomerTestimonials/CustomerTestimonials';
+import AboutPreview from './AboutPreview/AboutPreview';
+import ContactBookingCTA from './ContactBookingCTA/ContactBookingCTA';
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -27,6 +29,8 @@ const Home = () => {
       <WhyCooseUs></WhyCooseUs>
       <BeforeAfterGellery></BeforeAfterGellery>
       <CustomerTestimonials></CustomerTestimonials>
+      <AboutPreview></AboutPreview>
+      <ContactBookingCTA></ContactBookingCTA>
     </div>
   );
 };

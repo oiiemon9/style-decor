@@ -68,7 +68,6 @@ const ServiceInfo = () => {
         animate={{ opacity: 1 }}
         className=" "
       >
-        {/* Hero Image Section */}
         <div className="relative h-screen max-h-[600px] overflow-hidden">
           <img
             src={service.serviceImage}
@@ -157,7 +156,6 @@ const ServiceInfo = () => {
               </motion.div>
             </div>
 
-            {/* Booking Card - Sticky */}
             <div className="lg:col-span-1">
               <motion.div
                 initial={{ y: 80, opacity: 0 }}

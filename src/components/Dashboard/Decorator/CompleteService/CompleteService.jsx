@@ -30,71 +30,79 @@ const CompleteService = () => {
         </header>
       </div>
 
-      <div className="overflow-x-auto border rounded-2xl border-gray-300">
-        <table className="table text-nowrap">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>User Name</th>
-              <th>Service</th>
-              <th>Payment Status</th>
-              <th>location</th>
-
-              <th>Service Date</th>
-              <th>Total Price</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {serviceComplete.map((service) => (
+      {serviceComplete.length ? (
+        <div className="overflow-x-auto border rounded-2xl border-gray-300">
+          <table className="table text-nowrap">
+            {/* head */}
+            <thead>
               <tr>
-                <td>
-                  <div>
-                    <div className="font-bold">{service?.name}</div>
-                    <div className="text-sm opacity-50">{service?.email}</div>
-                    <div className="text-sm opacity-50">{service?.phone}</div>
-                  </div>
-                </td>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
-                        <img src={service?.serviceImage} />
+                <th>User Name</th>
+                <th>Service</th>
+                <th>Payment Status</th>
+                <th>location</th>
+
+                <th>Service Date</th>
+                <th>Total Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {serviceComplete.map((service) => (
+                <tr>
+                  <td>
+                    <div>
+                      <div className="font-bold">{service?.name}</div>
+                      <div className="text-sm opacity-50">{service?.email}</div>
+                      <div className="text-sm opacity-50">{service?.phone}</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                          <img src={service?.serviceImage} />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-bold">{service?.serviceTitle}</div>
                       </div>
                     </div>
-                    <div>
-                      <div className="font-bold">{service?.serviceTitle}</div>
+                  </td>
+
+                  <td>
+                    <div className="text-sm opacity-50">
+                      {service?.paymentStatus}
                     </div>
-                  </div>
-                </td>
+                  </td>
 
-                <td>
-                  <div className="text-sm opacity-50">
-                    {service?.paymentStatus}
-                  </div>
-                </td>
+                  <td>
+                    <div className="text-sm opacity-50">
+                      {service?.location}
+                    </div>
+                  </td>
 
-                <td>
-                  <div className="text-sm opacity-50">{service?.location}</div>
-                </td>
-
-                <td>
-                  <p>
-                    {' '}
-                    {format(new Date(service.serviceDate), 'dd MMMM yyyy')}
-                  </p>
-                </td>
-                <td>
-                  <p>${service?.totalPrice}</p>
-                </td>
-                <td>
-                  <p>Complete</p>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  <td>
+                    <p>
+                      {' '}
+                      {format(new Date(service.serviceDate), 'dd MMMM yyyy')}
+                    </p>
+                  </td>
+                  <td>
+                    <p>${service?.totalPrice}</p>
+                  </td>
+                  <td>
+                    <p>Complete</p>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p className="text-center text-xl font-semibold text-gray-600">
+          Services not Found
+        </p>
+      )}
     </div>
   );
 };

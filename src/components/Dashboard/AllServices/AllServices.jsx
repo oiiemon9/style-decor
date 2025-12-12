@@ -8,7 +8,7 @@ const AllServices = () => {
   const { loginUser } = use(AuthContext);
   const axiosInstance = useAxiosSecure();
 
-  const { data: allServices = [] } = useQuery({
+  const { data: allServices = [], refetch } = useQuery({
     queryKey: ['allServices', loginUser?.email],
     queryFn: async () => {
       const res = await axiosInstance.get(
@@ -19,7 +19,6 @@ const AllServices = () => {
   });
 
   const handelUpdate = async (id, isActive) => {
-    console.log(isActive);
     try {
       const res = await axiosInstance.patch(
         `/services-active-update/${id}?email=${loginUser?.email}`,
@@ -27,7 +26,9 @@ const AllServices = () => {
           isActive,
         }
       );
-      console.log(res.data);
+      if (res.data.modifiedCount) {
+        refetch();
+      }
     } catch (error) {
       console.log(error);
     }

@@ -58,7 +58,7 @@ const Login = () => {
     <section className=" dark:from-gray-900 dark:to-gray-800 font-display flex items-center justify-center min-h-[80vh] p-4">
       <div className="relative w-full max-w-5xl bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
         {/* Left Panel */}
-        <div className="left-panel w-full md:w-2/5 p-8 md:p-12 flex flex-col items-center justify-center text-center text-white relative bg-gradient-to-br from-blue-600 to-blue-800">
+        <div className="left-panel w-full md:w-2/5 p-8 md:p-12 flex flex-col items-center justify-center text-center text-white relative bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-900">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-1/4 -left-16 w-40 h-40 bg-white rounded-full blur-3xl"></div>
             <div className="absolute bottom-1/4 -right-16 w-40 h-40 bg-blue-300 rounded-full blur-3xl"></div>
@@ -186,7 +186,7 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-6"
+                className="w-full  gap-4 px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-2xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
               >
                 {isLoading ? (
                   <span className="loading loading-dots loading-md"></span>

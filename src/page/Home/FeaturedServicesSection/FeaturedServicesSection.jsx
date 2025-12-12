@@ -25,7 +25,7 @@ const FeaturedServicesSection = ({ services = [] }) => {
     },
   };
   return (
-    <section className="py-20 lg:py-28 bg-gradient-to-b from-purple-50 via-white to-gray-50">
+    <section className="py-20 lg:py-28 ">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

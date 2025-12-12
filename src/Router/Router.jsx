@@ -24,6 +24,7 @@ import Contact from '../page/Contact/Contact';
 import Profile from '../page/Profile/Profile';
 import BookingHistory from '../page/BookingHistory/BookingHistory';
 import AllServices from '../components/Dashboard/AllServices/AllServices';
+import ErrorPage from '../components/Dashboard/Error/ErrorPage';
 
 export const Router = createBrowserRouter([
   {
@@ -169,5 +170,9 @@ export const Router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: '*',
+    Component: ErrorPage,
   },
 ]);

@@ -6,7 +6,7 @@ import { Link, NavLink } from 'react-router';
 
 const NavBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { loginUser, logOut } = useContext(AuthContext);
+  const { loginUser, logOut, role } = useContext(AuthContext);
 
   const sections = [
     { label: 'Home', path: '/' },
@@ -74,7 +74,6 @@ const NavBar = () => {
     <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 font-display antialiased shadow-md">
       <header className="bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          {/* Logo */}
           <Link
             to="/"
             className="flex items-center gap-2 text-2xl font-bold text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
@@ -87,7 +86,6 @@ const NavBar = () => {
             Emon
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1 space-x-2">
               {sections.map((section) => (
@@ -145,9 +143,11 @@ const NavBar = () => {
                   <li>
                     <Link to="/booking-history">Booking History</Link>
                   </li>
-                  <li>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
+                  {role !== 'user' && (
+                    <li>
+                      <Link to="/dashboard">Dashboard</Link>
+                    </li>
+                  )}
                   <li>
                     <button onClick={handleLogout}>Logout</button>
                   </li>
@@ -156,7 +156,7 @@ const NavBar = () => {
             ) : (
               <Link
                 to="/login"
-                className=" btn btn-primary rounded-full hover:shadow-lg transition-all"
+                className=" btn bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-2xl"
               >
                 Login
               </Link>

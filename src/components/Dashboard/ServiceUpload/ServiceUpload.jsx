@@ -23,7 +23,7 @@ const ServiceUpload = () => {
     const file = data.serviceImage[0];
     const imageData = new FormData();
     imageData.append('image', file);
-    const imageAPIUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${
+    const imageAPIUrl = `https://api.imgbb.com/1/upload?&key=${
       import.meta.env.VITE_IMGBB_key
     }`;
     const imageRes = await axios.post(imageAPIUrl, imageData);

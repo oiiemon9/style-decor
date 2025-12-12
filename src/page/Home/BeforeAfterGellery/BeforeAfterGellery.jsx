@@ -8,7 +8,7 @@ const BeforeAfterGellery = () => {
     {
       id: 1,
       title: 'Royal Wedding Gate & Entrance',
-      image: 'https://i.ibb.co/8gdLNXBp/download-50.png',
+      image: 'https://i.ibb.co.com/xKDkhJSf/download-50.png',
       category: 'Wedding',
       location: 'Dhaka, Bangladesh',
       date: 'December 2025',

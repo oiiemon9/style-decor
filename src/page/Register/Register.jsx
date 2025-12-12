@@ -63,7 +63,7 @@ const Register = () => {
       const result = await registerUser(data.email, data.password);
       const user = result.user;
       if (user) {
-        const imageAPIUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${
+        const imageAPIUrl = `https://api.imgbb.com/1/upload?&key=${
           import.meta.env.VITE_IMGBB_key
         }`;
         const imageRes = await axios.post(imageAPIUrl, formData);

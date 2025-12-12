@@ -141,7 +141,7 @@ const AboutPreview = () => {
             {/* Main Image */}
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <img
-                src="https://i.ibb.co/8gdLNXBp/download-50.png"
+                src="https://i.ibb.co.com/xKDkhJSf/download-50.png"
                 alt="StyleDecor Team & Decoration"
                 className="w-full h-full object-cover"
               />

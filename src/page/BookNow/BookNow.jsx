@@ -3,11 +3,13 @@ import { AuthContext } from '../../Context/FirebaseProvider';
 import { useParams } from 'react-router';
 import useAxiosSecure from '../../CustomHook/useAxiosSecure';
 import { useForm } from 'react-hook-form';
+import ErrorPage from '../../components/Dashboard/Error/ErrorPage';
 
 const BookNow = () => {
   const { loginUser } = use(AuthContext);
   const axiosInstance = useAxiosSecure();
   const [bookService, setBookService] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -20,11 +22,14 @@ const BookNow = () => {
   const { serviceId } = useParams();
   useEffect(() => {
     const bookService = async () => {
+      setIsLoading(true);
       try {
         const res = await axiosInstance.get(`/services/${serviceId}`);
         setBookService(res.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     bookService();
@@ -44,6 +49,16 @@ const BookNow = () => {
       window.location.href = res.data.url;
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className=" flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-purple-600"></div>
+      </div>
+    );
+  }
+
+  if (!bookService) return <ErrorPage></ErrorPage>;
 
   return (
     <div>

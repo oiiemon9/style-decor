@@ -30,6 +30,7 @@ import {
   Sparkles,
   User,
 } from 'lucide-react';
+import ErrorPage from '../../components/Dashboard/Error/ErrorPage';
 
 const ServiceInfo = () => {
   const { serviceId } = useParams();
@@ -59,7 +60,7 @@ const ServiceInfo = () => {
     );
   }
 
-  if (!service) return <div>Service not found</div>;
+  if (!service) return <ErrorPage></ErrorPage>;
 
   return (
     <div className="container mx-auto p-4 md:p-8">

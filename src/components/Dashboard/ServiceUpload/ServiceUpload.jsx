@@ -34,6 +34,7 @@ const ServiceUpload = () => {
     data.createdByEmail = loginUser?.email;
     data.status = 'published';
     data.price = Number(data.price);
+    data.isActive = true;
 
     try {
       const res = await axiosInstance.post('/service-upload', data);

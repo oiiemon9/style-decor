@@ -121,63 +121,6 @@ const Users = () => {
               </div>
             </div>
           </div>
-          <div className="bg-card-light dark:bg-card-dark p-6 rounded-lg border border-border-light dark:border-border-dark">
-            <div className="flex items-start justify-between">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark">
-                  <span className="material-icons-outlined text-2xl text-text-light dark:text-text-dark">
-                    person_add
-                  </span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-subtext-light dark:text-subtext-dark">
-                    Users Today
-                  </p>
-                  <p className="text-3xl font-bold text-text-light dark:text-text-dark mt-1">
-                    1,379
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-card-light dark:bg-card-dark p-6 rounded-lg border border-border-light dark:border-border-dark">
-            <div className="flex items-start justify-between">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark">
-                  <span className="material-icons-outlined text-2xl text-text-light dark:text-text-dark">
-                    mail_outline
-                  </span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-subtext-light dark:text-subtext-dark">
-                    REST Requests
-                  </p>
-                  <p className="text-3xl font-bold text-text-light dark:text-text-dark mt-1">
-                    270,307
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-card-light dark:bg-card-dark p-6 rounded-lg border border-border-light dark:border-border-dark">
-            <div className="flex items-start justify-between">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark">
-                  <span className="material-icons-outlined text-2xl text-text-light dark:text-text-dark">
-                    lock
-                  </span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-subtext-light dark:text-subtext-dark">
-                    Auth Requests
-                  </p>
-                  <p className="text-3xl font-bold text-text-light dark:text-text-dark mt-1">
-                    23,484
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 

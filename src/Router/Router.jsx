@@ -23,6 +23,7 @@ import About from '../page/About/About';
 import Contact from '../page/Contact/Contact';
 import Profile from '../page/Profile/Profile';
 import BookingHistory from '../page/BookingHistory/BookingHistory';
+import AllServices from '../components/Dashboard/AllServices/AllServices';
 
 export const Router = createBrowserRouter([
   {
@@ -140,6 +141,14 @@ export const Router = createBrowserRouter([
         element: (
           <AdminPrivateRoute>
             <BookingList></BookingList>
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: 'all-services',
+        element: (
+          <AdminPrivateRoute>
+            <AllServices></AllServices>
           </AdminPrivateRoute>
         ),
       },

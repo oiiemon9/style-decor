@@ -1,6 +1,7 @@
 import React from 'react';
 import { Home, ArrowLeft, Sparkles } from 'lucide-react';
 import { Link } from 'react-router';
+import Logo from '../../Logo/Logo';
 const ErrorPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-12">
@@ -19,6 +20,9 @@ const ErrorPage = () => {
               Oops! Page Not Found
             </h2>
           </div>
+          <Link to="/" className="flex justify-center">
+            <Logo></Logo>
+          </Link>
 
           <div className="mt-10">
             <Link

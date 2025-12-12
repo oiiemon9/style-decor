@@ -59,70 +59,79 @@ const AllServices = () => {
         </header>
       </div>
 
-      <div className="overflow-x-auto border rounded-2xl border-gray-300">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>Service</th>
-              <th>Active</th>
+      {allServices.length ? (
+        <div className="overflow-x-auto border rounded-2xl border-gray-300">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Active</th>
 
-              <th>Create At</th>
-              <th>Location</th>
-              <th>Price</th>
-              <th>Created By Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-
-            {allServices.map((service) => (
-              <tr key={service?._id}>
-                <td className="text-nowrap">
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
-                        <img src={service?.serviceImage} />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="font-bold">{service?.serviceTitle}</div>
-                      <div className="text-sm opacity-50">
-                        {service?.category}
-                      </div>
-                    </div>
-                  </div>
-                </td>
-
-                <td>
-                  <div>
-                    <input
-                      type="checkbox"
-                      onChange={(e) =>
-                        handelUpdate(service?._id, e.target.checked)
-                      }
-                      defaultChecked={service?.isActive}
-                      className="toggle toggle-primary"
-                    />
-                  </div>
-                </td>
-                <td>
-                  <p> {format(new Date(service?.createdAt), 'dd MMMM yyyy')}</p>
-                </td>
-                <td>
-                  <p>{service?.location}</p>
-                </td>
-                <td className="text-nowrap">
-                  {' '}
-                  {service?.unit}: $
-                  <span className="font-bold text-lg">{service?.price}</span>
-                </td>
-                <td>{service?.createdByEmail}</td>
+                <th>Create At</th>
+                <th>Location</th>
+                <th>Price</th>
+                <th>Created By Email</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+
+              {allServices.map((service) => (
+                <tr key={service?._id}>
+                  <td className="text-nowrap">
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                          <img src={service?.serviceImage} />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-bold">{service?.serviceTitle}</div>
+                        <div className="text-sm opacity-50">
+                          {service?.category}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div>
+                      <input
+                        type="checkbox"
+                        onChange={(e) =>
+                          handelUpdate(service?._id, e.target.checked)
+                        }
+                        defaultChecked={service?.isActive}
+                        className="toggle toggle-primary"
+                      />
+                    </div>
+                  </td>
+                  <td>
+                    <p>
+                      {' '}
+                      {format(new Date(service?.createdAt), 'dd MMMM yyyy')}
+                    </p>
+                  </td>
+                  <td>
+                    <p>{service?.location}</p>
+                  </td>
+                  <td className="text-nowrap">
+                    {' '}
+                    {service?.unit}: $
+                    <span className="font-bold text-lg">{service?.price}</span>
+                  </td>
+                  <td>{service?.createdByEmail}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p className="text-center text-xl font-semibold text-gray-600">
+          All Services not Found
+        </p>
+      )}
     </div>
   );
 };

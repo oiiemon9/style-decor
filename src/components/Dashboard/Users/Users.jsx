@@ -124,90 +124,96 @@ const Users = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto border rounded-2xl border-gray-300">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th>Users</th>
-              <th>Role</th>
-              <th>User Id</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* row 1 */}
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
-                        <img src={user?.photoURL} />
+      {users.length ? (
+        <div className="overflow-x-auto border rounded-2xl border-gray-300">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>Users</th>
+                <th>Role</th>
+                <th>User Id</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              {users.map((user) => (
+                <tr key={user._id}>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                          <img src={user?.photoURL} />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-bold">{user?.name}</div>
+                        <div className="text-sm opacity-50">{user?.email}</div>
                       </div>
                     </div>
-                    <div>
-                      <div className="font-bold">{user?.name}</div>
-                      <div className="text-sm opacity-50">{user?.email}</div>
+                  </td>
+                  <td>
+                    <div className="flex items-center gap-2">
+                      <p>{user?.role}</p>
+                      <button
+                        onClick={() => handelModal(user._id)}
+                        className="btn btn-sm"
+                      >
+                        Edit
+                      </button>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div className="flex items-center gap-2">
-                    <p>{user?.role}</p>
+                  </td>
+                  <td>{user._id}</td>
+                  <th>
                     <button
-                      onClick={() => handelModal(user._id)}
-                      className="btn btn-sm"
+                      onClick={() => handleDelete(user._id)}
+                      className="btn btn-ghost btn-xs"
                     >
-                      Edit
+                      Delete
                     </button>
-                  </div>
-                </td>
-                <td>{user._id}</td>
-                <th>
-                  <button
-                    onClick={() => handleDelete(user._id)}
-                    className="btn btn-ghost btn-xs"
-                  >
-                    Delete
-                  </button>
-                </th>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <dialog ref={modalRef} className="modal">
-          <div className="modal-box">
-            <form method="dialog">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-            </form>
-            <h3 className="font-bold text-lg">User {updatedUser?.name}</h3>
-            <div>
-              <p className="py-4">Select Role</p>
-              <select
-                ref={roleSelectRef}
-                key={updatedUser?.role}
-                defaultValue={updatedUser?.role}
-                className="select select-bordered w-full max-w-xs"
-              >
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
-                <option value="decorator">Decorator</option>
-              </select>
-              <div className="mt-5 flex justify-end">
-                <button
-                  onClick={() => handleUpdate(updatedUser._id)}
-                  className="btn rounded-full bg-primary text-white"
-                >
-                  Update
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <dialog ref={modalRef} className="modal">
+            <div className="modal-box">
+              <form method="dialog">
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
                 </button>
+              </form>
+              <h3 className="font-bold text-lg">User {updatedUser?.name}</h3>
+              <div>
+                <p className="py-4">Select Role</p>
+                <select
+                  ref={roleSelectRef}
+                  key={updatedUser?.role}
+                  defaultValue={updatedUser?.role}
+                  className="select select-bordered w-full max-w-xs"
+                >
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                  <option value="decorator">Decorator</option>
+                </select>
+                <div className="mt-5 flex justify-end">
+                  <button
+                    onClick={() => handleUpdate(updatedUser._id)}
+                    className="btn rounded-full bg-primary text-white"
+                  >
+                    Update
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </dialog>
-      </div>
+          </dialog>
+        </div>
+      ) : (
+        <p className="text-center text-xl font-semibold text-gray-600">
+          Users List not Found
+        </p>
+      )}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { AuthContext } from '../../Context/FirebaseProvider';
 import useAxios from '../../CustomHook/useAxios';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import Logo from '../../components/Logo/Logo';
 
 const Login = () => {
   const { googleLogin, loginUser, setLoginUser, login } =
@@ -65,12 +66,12 @@ const Login = () => {
           </div>
 
           <div className="z-10 space-y-6">
-            <div className="flex items-center justify-center space-x-3">
-              <div className="w-10 h-10 border-2 border-white rounded-lg flex items-center justify-center font-bold text-lg">
-                D
-              </div>
-              <span className="text-2xl font-bold">Diprella</span>
-            </div>
+            <Link
+              to="/"
+              className="flex items-center justify-center space-x-3 bg-white rounded-full"
+            >
+              <Logo></Logo>
+            </Link>
 
             <div>
               <h2 className="text-6xl font-bold mb-4 serif-font">

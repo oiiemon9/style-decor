@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Hamburger from 'hamburger-react';
 import { AuthContext } from '../../Context/FirebaseProvider';
 import { Link, NavLink } from 'react-router';
+import Logo from '../Logo/Logo';
 
 const NavBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -74,16 +75,8 @@ const NavBar = () => {
     <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 font-display antialiased shadow-md">
       <header className="bg-white dark:bg-gray-900">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Link
-            to="/"
-            className="flex items-center gap-2 text-2xl font-bold text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
-          >
-            <img
-              className="h-12 w-12 rounded-lg"
-              src="https://i.ibb.co/4Z5YYw8j/Chat-GPT-Image-Dec-5-2025-05-48-32-PM-removebg-preview.png"
-              alt="Logo"
-            />
-            Emon
+          <Link to="/">
+            <Logo></Logo>
           </Link>
 
           <div className="navbar-center hidden lg:flex">

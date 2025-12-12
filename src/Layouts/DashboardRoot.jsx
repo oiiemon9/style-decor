@@ -2,6 +2,7 @@ import React, { use } from 'react';
 import Footer from '../components/Footer/Footer';
 import { Link, NavLink, Outlet } from 'react-router';
 import { AuthContext } from '../Context/FirebaseProvider';
+import Logo from '../components/Logo/Logo';
 
 const DashboardRoot = () => {
   const { role } = use(AuthContext);
@@ -11,7 +12,7 @@ const DashboardRoot = () => {
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
-          <nav className="navbar w-full bg-base-300">
+          <nav className="navbar w-full bg-white border-b border-gray-300">
             <label
               htmlFor="my-drawer-4"
               aria-label="open sidebar"
@@ -33,7 +34,9 @@ const DashboardRoot = () => {
                 <path d="M14 10l2 2l-2 2"></path>
               </svg>
             </label>
-            <div className="px-4">Navbar Title</div>
+            <Link to="/" className="ms-2">
+              <Logo></Logo>
+            </Link>
           </nav>
 
           <div>

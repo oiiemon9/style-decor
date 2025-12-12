@@ -12,6 +12,7 @@ import {
   Twitter,
 } from 'lucide-react';
 import { Link } from 'react-router';
+import Logo from '../Logo/Logo';
 
 const Footer = () => {
   const containerVariants = {
@@ -33,9 +34,9 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {/* Brand & Tagline */}
             <div>
-              <h2 className="text-2xl font-bold text-purple-700 mb-4">
-                StyleDecor
-              </h2>
+              <div className="mb-4">
+                <Logo></Logo>
+              </div>
               <p className="text-gray-600 leading-relaxed">
                 Bangladesh’s trusted platform for home & ceremony decoration
                 services. Book expert decorators instantly — elegant, reliable,

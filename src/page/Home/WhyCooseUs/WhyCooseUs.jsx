@@ -75,12 +75,6 @@ const WhyCooseUs = () => {
   };
   return (
     <section className="py-20 lg:py-28 bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-900 text-white overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-pink-500 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple-400 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <motion.div

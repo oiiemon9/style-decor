@@ -66,7 +66,6 @@ const Hero = () => {
 
   return (
     <section className="relative w-full h-screen min-h-[600px] max-h-[900px] overflow-hidden">
-      {/* Background Swiper Slider */}
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
@@ -113,15 +112,14 @@ const Hero = () => {
               className="inline-flex items-center gap-3"
               variants={badgeVariants}
             >
-              <span className="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-xl animate-pulse">
+              <span className="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-[8px] sm:text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-xl animate-pulse">
                 Every Corner Deserves Luxury
               </span>
               <span className="h-px w-20 bg-white/30"></span>
             </motion.div>
 
-            {/* Title */}
             <motion.h1
-              className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-black text-white tracking-tight drop-shadow-2xl serif-font mt-6"
+              className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-black text-white tracking-tight drop-shadow-2xl serif-font md:mt-6"
               variants={titleVariants}
             >
               Transform Your Space
@@ -131,7 +129,6 @@ const Hero = () => {
               </span>
             </motion.h1>
 
-            {/* Subheading */}
             <motion.p
               className="mt-6 text-sm text-gray-100 font-light max-w-2xl leading-relaxed opacity-95"
               variants={itemVariants}
@@ -141,7 +138,6 @@ const Hero = () => {
               detail.
             </motion.p>
 
-            {/* CTA Button */}
             <motion.div
               className="mt-10 flex flex-col sm:flex-row gap-4"
               variants={buttonVariants}
@@ -158,7 +154,7 @@ const Hero = () => {
 
             {/* Trust Indicators */}
             <motion.div
-              className="mt-16 flex flex-wrap items-center gap-8 text-white/80 text-sm"
+              className="mt-8 md:mt-16 flex flex-wrap items-center md:gap-8 text-white/80 text-sm"
               variants={containerVariants}
             >
               {[
@@ -180,7 +176,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 animate-bounce"
         animate={{ y: [0, 10, 0] }}

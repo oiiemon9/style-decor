@@ -216,7 +216,7 @@ const BookNow = () => {
                       />
                     </div>
                     <div className="flex-grow">
-                      <h3 className="font-semibold text-gray-900 dark:text-white">
+                      <h3 className="font-semibold text-gray-900 dark:text-white max-w-44">
                         {bookService?.serviceTitle}
                       </h3>
 

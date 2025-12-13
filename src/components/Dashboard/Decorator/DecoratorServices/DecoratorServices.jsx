@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { AuthContext } from '../../../../Context/FirebaseProvider';
 import useAxiosSecure from '../../../../CustomHook/useAxiosSecure';
 import { data } from 'react-router';
@@ -9,6 +9,7 @@ import Loading from '../../../Loading/Loading';
 const DecoratorServices = () => {
   const { loginUser } = use(AuthContext);
   const axiosInstance = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
 
   const {
     data: decoratorItem = [],
@@ -30,6 +31,7 @@ const DecoratorServices = () => {
   console.log(decoratorItem);
 
   const handelStatus = async (id) => {
+    setLoading(true);
     const info = {
       bookingStatus: [
         {
@@ -47,10 +49,13 @@ const DecoratorServices = () => {
       refetch();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handelUpdate2 = async (id) => {
+    setLoading(true);
     try {
       const res = await axiosInstance.patch(`/booking-status-update/${id}`, {
         update: 2,
@@ -58,9 +63,12 @@ const DecoratorServices = () => {
       refetch();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   const handelUpdate3 = async (id) => {
+    setLoading(true);
     try {
       const res = await axiosInstance.patch(`/booking-status-update/${id}`, {
         update: 3,
@@ -68,9 +76,12 @@ const DecoratorServices = () => {
       refetch();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   const handelUpdate4 = async (id) => {
+    setLoading(true);
     try {
       const res = await axiosInstance.patch(`/booking-status-update/${id}`, {
         update: 4,
@@ -78,9 +89,12 @@ const DecoratorServices = () => {
       refetch();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   const handelUpdate5 = async (id) => {
+    setLoading(true);
     try {
       const res = await axiosInstance.patch(`/booking-status-update/${id}`, {
         update: 5,
@@ -88,9 +102,12 @@ const DecoratorServices = () => {
       refetch();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   const handelUpdate6 = async (id) => {
+    setLoading(true);
     try {
       const res = await axiosInstance.patch(`/booking-status-update/${id}`, {
         update: 6,
@@ -99,6 +116,8 @@ const DecoratorServices = () => {
       refetch();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -198,6 +217,9 @@ const DecoratorServices = () => {
                         onClick={() => handelStatus(service?.bookingInfo?._id)}
                         className="btn"
                       >
+                        {loading && (
+                          <span className="loading loading-dots loading-sm"></span>
+                        )}{' '}
                         Accept booking
                       </button>
                     )}
@@ -206,6 +228,9 @@ const DecoratorServices = () => {
                         onClick={() => handelUpdate2(service?.bookingInfo?._id)}
                         className="btn text-nowrap"
                       >
+                        {loading && (
+                          <span className="loading loading-dots loading-sm"></span>
+                        )}{' '}
                         Update (Planning Phase)
                       </button>
                     )}
@@ -214,6 +239,9 @@ const DecoratorServices = () => {
                         onClick={() => handelUpdate3(service?.bookingInfo?._id)}
                         className="btn text-nowrap"
                       >
+                        {loading && (
+                          <span className="loading loading-dots loading-sm"></span>
+                        )}{' '}
                         Update (Materials Prepared)
                       </button>
                     )}
@@ -222,6 +250,9 @@ const DecoratorServices = () => {
                         onClick={() => handelUpdate4(service?.bookingInfo?._id)}
                         className="btn text-nowrap"
                       >
+                        {loading && (
+                          <span className="loading loading-dots loading-sm"></span>
+                        )}{' '}
                         Update (On the Way to Venue)
                       </button>
                     )}
@@ -230,6 +261,9 @@ const DecoratorServices = () => {
                         onClick={() => handelUpdate5(service?.bookingInfo?._id)}
                         className="btn text-nowrap"
                       >
+                        {loading && (
+                          <span className="loading loading-dots loading-sm"></span>
+                        )}{' '}
                         Update (Setup in Progress)
                       </button>
                     )}
@@ -238,6 +272,9 @@ const DecoratorServices = () => {
                         onClick={() => handelUpdate6(service?.bookingInfo?._id)}
                         className="btn text-nowrap"
                       >
+                        {loading && (
+                          <span className="loading loading-dots loading-sm"></span>
+                        )}{' '}
                         Update (Completed)
                       </button>
                     )}

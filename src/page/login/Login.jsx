@@ -5,11 +5,13 @@ import useAxios from '../../CustomHook/useAxios';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import Logo from '../../components/Logo/Logo';
+import { Eye, EyeOff, Mail, SquareAsterisk } from 'lucide-react';
 
 const Login = () => {
   const { googleLogin, loginUser, setLoginUser, login } =
     useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPass, setShowPass] = useState(false);
   const axiosInstance = useAxios();
   const location = useLocation();
   const navigate = useNavigate();
@@ -91,7 +93,6 @@ const Login = () => {
           </Link>
         </div>
 
-        {/* Right Panel */}
         <div className="w-full md:w-3/5 p-8 md:p-16 flex flex-col justify-center bg-white dark:bg-gray-800 relative overflow-hidden">
           <div className="absolute top-0 right-0 -mt-12 -mr-12 w-48 h-48 bg-gradient-to-br from-blue-400 to-blue-200 rounded-full opacity-10"></div>
 
@@ -152,6 +153,7 @@ const Login = () => {
                   Email Address
                 </label>
                 <div className="relative">
+                  <Mail className="text-gray-300 absolute top-0 bottom-0 my-auto left-3" />
                   <input
                     {...register('email', { required: true })}
                     className="w-full bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg py-3 pl-12 pr-4 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-0 transition-colors duration-300"
@@ -171,11 +173,19 @@ const Login = () => {
                   Password
                 </label>
                 <div className="relative">
+                  <SquareAsterisk className="text-gray-300 absolute top-0 bottom-0 my-auto left-3" />
+                  <button
+                    type="button"
+                    onClick={() => setShowPass(!showPass)}
+                    className=" absolute top-0 bottom-0 my-auto right-3 h-fit"
+                  >
+                    {showPass ? <EyeOff /> : <Eye />}
+                  </button>
                   <input
                     {...register('password', { required: true })}
                     className="w-full bg-gray-50 dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-lg py-3 pl-12 pr-4 text-gray-800 dark:text-gray-200 placeholder-gray-500 focus:border-blue-500 focus:ring-0 transition-colors duration-300"
                     placeholder="Password"
-                    type="password"
+                    type={showPass ? 'text' : 'password'}
                   />
                 </div>
                 {errors.password && (

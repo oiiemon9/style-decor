@@ -3,12 +3,13 @@ import { AuthContext } from '../../../../Context/FirebaseProvider';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../../CustomHook/useAxiosSecure';
 import { format } from 'date-fns';
+import Loading from '../../../Loading/Loading';
 
 const CompleteService = () => {
   const axiosInstance = useAxiosSecure();
   const { loginUser } = use(AuthContext);
 
-  const { data: serviceComplete = [] } = useQuery({
+  const { data: serviceComplete = [], isPending } = useQuery({
     queryKey: ['completeData', loginUser?.email],
     queryFn: async () => {
       const res = await axiosInstance.get(
@@ -21,7 +22,7 @@ const CompleteService = () => {
   console.log(serviceComplete);
 
   return (
-    <div className="container mx-auto px-4 py-10 ">
+    <div className="container mx-auto py-10 ">
       <div className="">
         <header className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-text-light dark:text-text-dark">
@@ -30,7 +31,9 @@ const CompleteService = () => {
         </header>
       </div>
 
-      {serviceComplete.length ? (
+      {isPending ? (
+        <Loading></Loading>
+      ) : serviceComplete.length ? (
         <div className="overflow-x-auto border rounded-2xl border-gray-300">
           <table className="table text-nowrap">
             {/* head */}

@@ -4,6 +4,7 @@ import { AuthContext } from '../../../../Context/FirebaseProvider';
 import useAxiosSecure from '../../../../CustomHook/useAxiosSecure';
 import { data } from 'react-router';
 import { format } from 'date-fns';
+import Loading from '../../../Loading/Loading';
 
 const DecoratorServices = () => {
   const { loginUser } = use(AuthContext);
@@ -12,6 +13,7 @@ const DecoratorServices = () => {
   const {
     data: decoratorItem = [],
     error,
+    isPending,
     refetch,
   } = useQuery({
     queryKey: ['decoratorEmail', loginUser?.email],
@@ -101,7 +103,7 @@ const DecoratorServices = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-10 ">
+    <div className="container mx-auto py-10 ">
       <div className="">
         <header className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-text-light dark:text-text-dark">
@@ -109,7 +111,9 @@ const DecoratorServices = () => {
           </h1>
         </header>
       </div>
-      {decoratorItem[0]?.bookingObjId ? (
+      {isPending ? (
+        <Loading></Loading>
+      ) : decoratorItem[0]?.bookingObjId ? (
         <div className="overflow-x-auto border rounded-2xl border-gray-300">
           <table className="table text-nowrap">
             {/* head */}

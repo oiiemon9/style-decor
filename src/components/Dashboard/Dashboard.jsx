@@ -6,7 +6,7 @@ import DecoratorDashboard from './DecoratorDashboard/DecoratorDashboard';
 const Dashboard = () => {
   const { role } = use(AuthContext);
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto">
       {role === 'admin' && <AdminDashboard></AdminDashboard>}
       {role === 'decorator' && <DecoratorDashboard></DecoratorDashboard>}
     </div>

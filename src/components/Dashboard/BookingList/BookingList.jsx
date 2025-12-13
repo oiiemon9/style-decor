@@ -3,6 +3,7 @@ import useAxiosSecure from '../../../CustomHook/useAxiosSecure';
 import { format } from 'date-fns';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../../Context/FirebaseProvider';
+import Loading from '../../Loading/Loading';
 
 const BookingList = () => {
   const axiosInstance = useAxiosSecure();
@@ -11,7 +12,11 @@ const BookingList = () => {
   const [selectBookingId, setSelectBookingId] = useState('');
   const modalRef = useRef();
 
-  const { data: bookingItem = [], refetch } = useQuery({
+  const {
+    data: bookingItem = [],
+    isPending,
+    refetch,
+  } = useQuery({
     queryKey: ['bookingData'],
     queryFn: async () => {
       const res = await axiosInstance.get(`/bookings?email=${loginUser.email}`);
@@ -50,7 +55,7 @@ const BookingList = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-10 ">
+    <div className="container mx-auto py-10 ">
       <div className="">
         <header className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-text-light dark:text-text-dark">
@@ -59,7 +64,9 @@ const BookingList = () => {
         </header>
       </div>
 
-      {bookingItem.length ? (
+      {isPending ? (
+        <Loading></Loading>
+      ) : bookingItem.length ? (
         <div className="overflow-x-auto border rounded-2xl border-gray-300">
           <table className="table">
             {/* head */}

@@ -87,7 +87,7 @@ const ServiceInfo = () => {
           </div>
         </div>
 
-        <div className="container mx-auto px-6 -mt-32 relative z-10">
+        <div className="container mx-auto md:px-6 -mt-32 relative z-10">
           <div className="grid lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2">
               <motion.div
@@ -102,18 +102,20 @@ const ServiceInfo = () => {
                       <Sparkles className="w-4 h-4" />
                       {service.category?.toUpperCase()}
                     </span>
-                    <span className="text-gray-500">• Premium Service</span>
+                    <span className="text-sm md:text-base text-gray-500">
+                      • Premium Service
+                    </span>
                   </div>
                   <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
                     {service.serviceTitle}
                   </h1>
 
                   <div className="flex items-center gap-6 text-gray-600">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 text-sm md:text-base">
                       <MapPin className="w-5 h-5 text-purple-600" />
                       <span className="font-medium">{service.location}</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 text-sm md:text-base">
                       <Calendar className="w-5 h-5 text-purple-600" />
                       <span>Available Now</span>
                     </div>
@@ -175,7 +177,7 @@ const ServiceInfo = () => {
 
                 <Link
                   to={`/services/${service?._id}/book-now`}
-                  className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
+                  className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 md:py-5 rounded-2xl font-bold md:text-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3"
                 >
                   <Calendar className="w-6 h-6" />
                   Book This Service Now

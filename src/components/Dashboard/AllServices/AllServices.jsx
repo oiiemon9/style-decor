@@ -3,12 +3,17 @@ import { AuthContext } from '../../../Context/FirebaseProvider';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../CustomHook/useAxiosSecure';
 import { format } from 'date-fns';
+import Loading from '../../Loading/Loading';
 
 const AllServices = () => {
   const { loginUser } = use(AuthContext);
   const axiosInstance = useAxiosSecure();
 
-  const { data: allServices = [], refetch } = useQuery({
+  const {
+    data: allServices = [],
+    isPending,
+    refetch,
+  } = useQuery({
     queryKey: ['allServices', loginUser?.email],
     queryFn: async () => {
       const res = await axiosInstance.get(
@@ -50,7 +55,7 @@ const AllServices = () => {
   // }
 
   return (
-    <div className="container mx-auto px-4 py-10 ">
+    <div className="container mx-auto py-10 ">
       <div className="">
         <header className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-text-light dark:text-text-dark">
@@ -59,7 +64,9 @@ const AllServices = () => {
         </header>
       </div>
 
-      {allServices.length ? (
+      {isPending ? (
+        <Loading></Loading>
+      ) : allServices.length ? (
         <div className="overflow-x-auto border rounded-2xl border-gray-300">
           <table className="table">
             {/* head */}

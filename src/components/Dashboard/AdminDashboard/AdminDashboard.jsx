@@ -158,7 +158,7 @@ const AdminDashboard = () => {
   // }
 
   return (
-    <div className="container mx-auto p-6 space-y-12">
+    <div className="container mx-auto space-y-12">
       <div className="">
         <div className="mb-10">
           <h1 className="text-4xl font-bold text-gray-800">Admin Dashboard</h1>

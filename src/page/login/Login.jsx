@@ -65,14 +65,15 @@ const Login = () => {
             <div className="absolute bottom-1/4 -right-16 w-40 h-40 bg-blue-300 rounded-full blur-3xl"></div>
           </div>
 
-          <div className="z-10 space-y-6">
-            <Link
-              to="/"
-              className="flex items-center justify-center space-x-3 bg-white rounded-full"
-            >
-              <Logo></Logo>
-            </Link>
+          <Link
+            to="/"
+            className=" bg-white rounded-full flex px-10
+          "
+          >
+            <Logo></Logo>
+          </Link>
 
+          <div className="">
             <div>
               <h2 className="text-6xl font-bold mb-4 serif-font">
                 Welcome Back!
@@ -81,14 +82,13 @@ const Login = () => {
                 Sign in to access your account and manage your preferences
               </p>
             </div>
-
-            <Link
-              to="/register"
-              className="bg-white text-blue-600 font-bold py-3 px-12 rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              Register
-            </Link>
           </div>
+          <Link
+            to="/register"
+            className="bg-white text-blue-600 font-bold py-3 px-12 rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mt-10 z-10"
+          >
+            Register
+          </Link>
         </div>
 
         {/* Right Panel */}

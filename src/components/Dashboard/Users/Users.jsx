@@ -3,6 +3,7 @@ import useAxios from '../../../CustomHook/useAxios';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../Context/FirebaseProvider';
+import Loading from '../../Loading/Loading';
 
 const Users = () => {
   const axiosInstance = useAxios();
@@ -10,7 +11,11 @@ const Users = () => {
   const [updatedUser, setUpdatedUser] = useState(null);
   const modalRef = useRef();
   const roleSelectRef = useRef();
-  const { data: users = [], refetch } = useQuery({
+  const {
+    data: users = [],
+    isPending,
+    refetch,
+  } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
       const res = await axiosInstance.get(`/users?email=${loginUser.email}`);
@@ -76,7 +81,7 @@ const Users = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-10 ">
+    <div className="container mx-auto py-10 ">
       <div className="">
         <header className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-text-light dark:text-text-dark">
@@ -124,7 +129,9 @@ const Users = () => {
         </div>
       </div>
 
-      {users.length ? (
+      {isPending ? (
+        <Loading></Loading>
+      ) : users.length ? (
         <div className="overflow-x-auto border rounded-2xl border-gray-300">
           <table className="table">
             {/* head */}

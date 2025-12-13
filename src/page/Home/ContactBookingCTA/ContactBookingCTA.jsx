@@ -40,10 +40,9 @@ const ContactBookingCTA = () => {
           viewport={{ once: true }}
           className="grid lg:grid-cols-2 gap-12 items-center bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-900 rounded-3xl overflow-hidden shadow-2xl"
         >
-          {/* Left: Contact Info + Quick Form */}
           <motion.div
             variants={itemVariants}
-            className="p-10 lg:p-16 text-white"
+            className="p-4 lg:p-16 text-white"
           >
             <div className="flex items-center gap-3 mb-6">
               <Sparkles className="w-8 h-8 text-pink-300" />
@@ -81,7 +80,7 @@ const ContactBookingCTA = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 type="submit"
-                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:shadow-2xl transition-all"
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 py-3 md:py-5 rounded-xl font-bold md:text-lg flex items-center justify-center gap-3 hover:shadow-2xl transition-all"
               >
                 <Calendar className="w-6 h-6" />
                 Get Free Quote Now
@@ -97,7 +96,7 @@ const ContactBookingCTA = () => {
 
           <motion.div
             variants={itemVariants}
-            className="bg-white/10 backdrop-blur-lg p-10 lg:p-16"
+            className="bg-white/10 backdrop-blur-lg p-4 lg:p-16"
           >
             <h3 className="text-3xl font-bold text-white mb-10">
               Contact Us Anytime
@@ -109,10 +108,10 @@ const ContactBookingCTA = () => {
                   <Phone className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white">
+                  <h4 className="md:text-xl font-bold text-white">
                     Call or WhatsApp
                   </h4>
-                  <p className="text-2xl font-bold text-pink-300 mt-1">
+                  <p className="md:text-2xl font-bold text-pink-300 mt-1">
                     +880 1234-567890
                   </p>
                   <p className="text-sm mt-1">Available 9 AM – 10 PM</p>
@@ -124,8 +123,10 @@ const ContactBookingCTA = () => {
                   <Mail className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white">Email Us</h4>
-                  <p className="text-lg text-pink-300">hello@styledecor.com</p>
+                  <h4 className="md:text-xl font-bold text-white">Email Us</h4>
+                  <p className="md:text-lg text-pink-300">
+                    hello@styledecor.com
+                  </p>
                   <p className="text-sm mt-1">We reply within 1 hour</p>
                 </div>
               </div>
@@ -135,8 +136,10 @@ const ContactBookingCTA = () => {
                   <MapPin className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white">Head Office</h4>
-                  <p className="text-lg">
+                  <h4 className="md:text-xl font-bold text-white">
+                    Head Office
+                  </h4>
+                  <p className="md:text-lg">
                     123 Style Avenue, Gulshan-2
                     <br />
                     Dhaka 1212, Bangladesh
@@ -149,10 +152,10 @@ const ContactBookingCTA = () => {
                   <Clock className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white">
+                  <h4 className="md:text-xl font-bold text-white">
                     Working Hours
                   </h4>
-                  <p className="text-lg">
+                  <p className="md:text-lg">
                     Mon–Sat: 9:00 AM – 10:00 PM
                     <br />
                     Sunday: 10:00 AM – 8:00 PM

@@ -63,13 +63,13 @@ const BookNow = () => {
   return (
     <div>
       <section className="bg-background-light dark:bg-background-dark  p-4 sm:p-6 md:p-8 flex items-center justify-center font-display">
-        <div className="w-full container mx-auto rounded-3xl p-6 sm:p-8 md:p-12 border border-gray-300">
+        <div className="w-full container mx-auto rounded-3xl p-6 sm:p-8 md:p-12 border border-gray-300 overflow-hidden">
           <form
             onSubmit={handleSubmit(handelConfirmBooking)}
             className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
           >
             <div className="lg:col-span-7">
-              <nav className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+              <nav className="text-sm text-gray-500 dark:text-gray-400 mb-6 flex flex-wrap">
                 <a
                   className="hover:text-primary dark:hover:text-white"
                   href="#"
@@ -194,7 +194,7 @@ const BookNow = () => {
                     </label>
                     <textarea
                       {...register('note')}
-                      className="w-full bg-gray-100 dark:bg-gray-800 border-transparent focus:ring-2 focus:ring-primary focus:border-transparent rounded-lg p-3 text-gray-900 dark:text-gray-100 placeholder-gray-500"
+                      className="w-full bg-gray-100 dark:bg-gray-800 focus:ring-2 focus:ring-black focus:border-transparent rounded-lg p-3 text-gray-900 dark:text-gray-100 placeholder-gray-500"
                       type="text"
                     />
                   </div>
@@ -207,7 +207,7 @@ const BookNow = () => {
                   Service summary
                 </h2>
                 <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
+                  <div className="flex flex-wrap items-center space-x-4">
                     <div className="w-20 h-20 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden flex-shrink-0">
                       <img
                         alt={bookService?.serviceTitle}
@@ -264,7 +264,7 @@ const BookNow = () => {
                     ${bookService?.price * quantity}
                   </span>
                 </div>
-                <div className="mt-8 flex justify-between items-center">
+                <div className="mt-8 flex justify-between items-center flex-wrap">
                   <div className="flex gap-2 flex-col text-sm">
                     <label className="flex items-center gap-2 cursor-pointer  rounded-lg ">
                       <input
@@ -289,7 +289,7 @@ const BookNow = () => {
                   </div>
                   <button
                     type="submit"
-                    className="btn btn-primary rounded-full"
+                    className="btn btn-primary rounded-full mt-2 md: mt-0"
                   >
                     Confirm booking
                   </button>

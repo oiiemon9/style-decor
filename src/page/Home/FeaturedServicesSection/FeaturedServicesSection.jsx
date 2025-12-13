@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 import { Sparkles, MapPin, Calendar, ArrowRight } from 'lucide-react';
 import ServiceItem from '../../Services/ServiceItem';
 import { Link } from 'react-router';
+import Loading from '../../../components/Loading/Loading';
 
-const FeaturedServicesSection = ({ services = [] }) => {
+const FeaturedServicesSection = ({ services = [], loading }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -51,17 +52,21 @@ const FeaturedServicesSection = ({ services = [] }) => {
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8"
-        >
-          {services.slice(0, 8).map((service) => (
-            <ServiceItem key={service._id} service={service} />
-          ))}
-        </motion.div>
+        {loading ? (
+          <Loading></Loading>
+        ) : (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8"
+          >
+            {services.slice(0, 8).map((service) => (
+              <ServiceItem key={service._id} service={service} />
+            ))}
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}

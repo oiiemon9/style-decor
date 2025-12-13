@@ -10,14 +10,18 @@ import ContactBookingCTA from './ContactBookingCTA/ContactBookingCTA';
 
 const Home = () => {
   const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(false);
   const axiosInstance = useAxios();
   useEffect(() => {
     const dataFetch = async () => {
+      setLoading(true);
       try {
         const res = await axiosInstance.get('/resent-service');
         setServices(res.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
     dataFetch();
@@ -25,7 +29,10 @@ const Home = () => {
   return (
     <div>
       <Hero></Hero>
-      <FeaturedServicesSection services={services}></FeaturedServicesSection>
+      <FeaturedServicesSection
+        services={services}
+        loading={loading}
+      ></FeaturedServicesSection>
       <WhyCooseUs></WhyCooseUs>
       <BeforeAfterGellery></BeforeAfterGellery>
       <CustomerTestimonials></CustomerTestimonials>

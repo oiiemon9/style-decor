@@ -149,16 +149,16 @@ const AboutPreview = () => {
 
               {/* Floating Stats */}
               <div className="absolute top-0 h-full w-full flex justify-center items-center ">
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 gap-1 md:gap-6">
                   {stats.map((stat, idx) => (
                     <div
                       key={idx}
                       className="bg-white/20 backdrop-blur-md rounded-2xl text-center border border-white/30 p-2 md:p-6 lg:p-4 xl:p-6"
                     >
-                      <h3 className="text-4xl font-bold text-pink-300">
+                      <h3 className="md:text-4xl font-bold text-pink-300">
                         {stat.number}
                       </h3>
-                      <p className="text-sm text-purple-100 mt-2">
+                      <p className="text-sm text-purple-100 md:mt-2">
                         {stat.label}
                       </p>
                     </div>
